@@ -1,0 +1,1934 @@
+* (here OR is not XOR)
+* IN        - pertarn (is a member[element]).
+* TO        - SUBSET                                X <= Y
+* PTO       - PROPER SUBSET, X TO Y, but X != Y.    X <  Y
+* &         - UNION
+* ||        - INTERSECTION
+* \         - RELATIVE COMPLEMENT
+* , ; ^ | .|- and or xor  shtich(!or)  strelka(!and)
+* ^^        - power
+* @, $, $!  - all(any), some, exactly one
+* |-        - turnsile. LOGICAL CONSEQUENCE [ispolz dlia obozn pravila vivoda](SYNTACTIC)
+                  (applied for math induction, but it my suggestion)
+* =>        - LOGICAL CONSEQUENCE ( LOGICAl IMPLICATION)(SYNTACTIC)
+* |=        - DOUBLE TURNSTILE.
+* <=>       - "if and only if" (sometimes "logically equivalent")
+* o(A-Z)    - isomorphism
+* {X...}   - SET of all SUBSETS of X
+
+* LOGICAL CONNECTIVES PRIORITY    !  ,  ; @ $ ->  <->    if equal then left is prior
+- DOUBLE TURNSITLE
+     read as "entails", "models", "is a semantic consequence of" or "is stronger than"
+  meaning:
+    - SEMANTIC CONSEQUENCE 
+    - TAUTOLOGY, |= w. which is to say that the expression |= w is a
+      SEMANTIC CONSEQUENCE of the EMPTY SET( {} ).
+    - TAUTOLOGICAL IMPLICATION by wiki
+    - show satisfaction, with a model 
+
+- MATHEMATICAL NOTATION - NOTATION
+    is a system of symbolic representations of mathematical objects and ideas
+
++++++++++++++++++ INTRODUCION ++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+======= 12
+
+- SET   - is collection of object what is called 'elements' or 'members'.
+- UNION of set X & Y  - set of all object that are members of X OR Y.
+- INTERSECTION of X || Y  - set of elements that X and Y have in common.
+- DIFFERENCE
+- RELATIVE COMPLEMENT of X \ Y  - set of X elements that are not members of Y.
+- UNORDERED PAIR  - {x, y}.
+- UNIT SET of x  - {x}.
+- ORDERED n-TUPLE[uporiadochenie n-ki] of b1..bn  - <b1..bn>,
+     <b1..bn> = <c1..cn> only if b1=c1...bn=cn.
+- ORDERED PAIRS  - <b1,b2>, (<b1,b2> = <b2,b1>) <=> b1=b2
+- X^^n  -  SET of ORDERED k-TUPLES <b1..bn> of elements b1..bn of X, X^1 = X.
+
+======= 13
+
+- CARTESIAN PRODUCT[- decartove proizvedenie]  - YxZ is set of ORDERED PAIRS <y,z> ,
+     y IN Y, and z IN Z
+- RELATION
+- N-place RELATION on X  - SUBSET of X^^n, that is SUBSET of n-TUPLES of ELEMENTS
+     of X. (in some cases it is PREDICATE)
+- BINARY RELATION   - two place relation, subset ordered 2-TUPLE.
+- PROPERTY of X     - one place relation.
+
+  Given binary relation R, then..
+- DOMAIN of R   - set of all y, such that <y,z> IN R for some z.
+- TARGET SET of FUNCTION (in case RELATION is a FUNCTION)
+- CODOMAIN of R
+  (wiki)( CODOMAIN is also sometimes referenced as RANGE but that term
+          is ambiguous as it may also refer to the IMAGE)
+- RANGE of R    - set of all z, such that <y,z> IN R for some y.
+- FIELD of R    - is DOMAIN & RANGE.
+
+- REFLEXIVE b-relation   - @x, xRx, x IN FIELD of R.
+- SYMMETRIC b-relation   - @x,y,  xRy => yRx
+- ASYMMETRIC b-relation  - @x,y,  xRy => !(yRx)
+- TRANSITIVE b-relation  - @x,y, [xRy, yRz] => xRz.
+- INVERSE RELATION R^^-1 of R   - SET of all ORDERED PAIRS <x,y>,
+      such that <y,x> IN R
+- COMPLETE RELATION
+- TOTALITY - COMPARABILITY
+- TOTAL b-RELATION R over a SET X  @a,b in X, aRb ; bRa
+    TOTALITY => REFLEXIVITY
+                              x COMPARABLE TO y <=> y COMPARABLE TO x
+- INCOMPARABILITY - !(xRy; yRx)
+- ANTISYMMETRIC - aRb, bRa => a=b
+- EQUIVALENCE relation - REFLEXIVE, SYMMETRIC, TRANSITIVE, b-relation.
+
+- IDENTITY RELATION  lX on X  - consisting of all pair <x,x>, x IN X,
+    is example of EQUIVALENCE b-relation.
+
+  Given equivalence relation R, whose FIELD is X..
+- R-EQUIVALENCE CLASS of [y]    - if y IN X, [y] is the SET of @z, z IN X, yRz.
+        [u]=[v]     <=>    y=v
+        ![y]=[v]    <=>    [u]&[v]={}
+- DISJOINT SETs - X and Y, @e !(e IN X, x IN Y)
+- MUTUALLY DISJOINT
+- PAIRWISE DISJOINT
+    family of SETs such that every 2 different SETs in the family are DISJOINT
+
+- DATATYPES - VARIANT RECORD
+- SUM TYPE(type theory) - COPRODUCT of SETs(category theory)
+- DISCRIMINATED UNION - TAGGED UNION
+- DISJOINT UNION of a family of SETs    - modified UNION OPERATION
+    that indexes the ELEMENTs according to which SET they originated in;
+    DISJOINT SETs have no ELEMENT in common.
+    When one says that a SET is the DISJOINT UNION of a family of SUBSETs, this
+    means that it is the UNION of the SUBSETS and that the SUBSETS are PAIRWISE DISJOINT.
+    The ELEMENTs of the DISJOINT UNION are ORDERED PAIRS <x,i> x is ELEMENT of
+    SET, i is INDEX of SET
+    DISJOINT UNION - ALGEBRAIC DATA TYPE (one among many)
+
+- PARTITION of a SET - grouping of the SET's ELEMENTs into non-empty SUBSETs,
+    in such a way that @ELEMENT is included in ONE AND ONLY ONE of the SUBSETs.'
+
+- FAMILY of SUBSETs of S
+- FAMILY of SETs over S   - collection F of subsets of a given set S
+- FAMILY of SETs    - collection of any SETs whatsoever
+
+- ALGEBRAIC 
+
+======= 14
+
+- FUNCTION f   - b-relation where <x,y> , <x,z> => y=z,
+    (any)@x, (single)$!y such that <x,y> IN f, y is denoted as f(x).
+
+
+- DEFINED   - x IN DOMAIN f => [f(x) is DEFINED].
+- X ONTO Y  - X is DOMAIN f, Y is RANGE f.    (- ONTO)
+- X INTO Z  - X ONTO Y, Y TO Z.(Y<=Z)         (- INTO)
+
+- FUNCTION of n argument  - DOMAIN consist of n-TUPLES.
+- TOTAL FUNCTION of n arg on X  - is f whose DOMAIN is X^^n.
+    customary write f(x1..xn) instead of f(<x1..xn>).
+    such FUNCTIONS are NOT - INJECTIVE
+- PARTIAL FUNCTION of n arg on X  - is f whose DOMAIN PTO X^^n.
+    that is has not to MAP every DOMAIN ELEMENT to CODOMAIN(RANGE)
+    such FUNCTIONs are - INJECTIVE.
+  [Davis]
+    it is quite possible to possess an ALGORITHM that specifies a FUNCTION
+    without being able to tell which ELEMENTS belong to its DOMAIN. This makes
+    the notion of a so-called PARTIAL FUNCTION play a central role in COMPUTABILITY THEORY
+  [wiki]
+    X' is subset of X
+    Partial functions are often used when the exact domain, X', is not known
+    (e.g. many functions in COMPUTABILITY THEORY). 
+
+- CLOSURE
+    S - SET, f - PARTIAL FUNCTION on S =>
+    [ RANGE of f is SUBSET of S  =>  S - CLOSED UNDER f ]
+
+- VALUE OF FUNCTION - FUNCTION VALUE - ARGUMENTS OF FUNCTIONS - FUNCTION ARGUMENTS
+    f(x1..xn) is refered as VALUE of f for the ARGUMENTS x1..xn.
+
+  X is DOMAIN f, Y is RANGE f,
+- RESTRICTION fZ of f to Z    -  FUNCTION f & (ZxY).
+    (fZ(u) = v) <=> (u IN Z, f(u) = v)
+- IMAGE of Z under f    - RANGE of fZ.
+- INVERSE IMAGE of W under f    - @u IN DOMAIN of f, such that f(u) IN W.
+- MAPS
+    X PTO DOMEIN of f, Y(or SUBSET) is IMAGE of X under f    => f MAPS X INTO(ONTO) Y
+
+- COMPUTABLE FUNCTION (like operation, it is not strict definition ....)
+- ALGORYTHMIC OPERATION - RECURSIVE OPERATION - COMPUTABLE OPERATION  
+    (by penrous)
+                                      if it can be implemented on Turing machine.
+    (by smullyan)p15
+                                      it is computable In some formal systems.
+- OPERATION with n ARGUMENTS on X
+- n-PLACE OPERATION on X   -  FUNCTION from X^^n to X
+- COMPOSITION (f o g) of f, g  - f( g(x) ).
+    (fg(x) is DEFINED) <=> (g[x] is DEFINED , f(g(x)) is DEFINED)
+- BIJECTIVE FUNCTION - BIJECTION
+- ONE-TO-ONE CORRESPONDENCE (1-1) between X, Y   - f(x)=f(y) => x=y
+    or(also) if X is DOMAIN, Y is RANGE of ONE-TO-ONE FUNCTION(INJECTION without extra elem in Y).
+    (dont confuse with - ONE-TO-ONE FUNCTION, that is - INJECTION(- INJECTIVE FUNCTION))
+        f is 1-1  <=>   f^^-1 is a FUNCTION
+- INVERSE FUNCTION
+- INVERSE RELATION (- f^^-1)  - ONE-TO-ONE CORRESPONDENCE Y to X 
+    (f^^-1 o f) = lX  (f o f^^-1) = lY (here lX lY is IDENTITY RELATION)
+- CORRESPONDENCE    - ORDERED TRIPLE <X,Y,R>, where R is a RELATION from X to Y,
+    i.e. any SUBSET of the CARTESIAN PRODUCT X×Y
+- INVOLUTORY FUNCTION   - is a FUNCTION f that is its own INVERSE.
+
+    [f is 1-1 CORRESPONDENCE between X and Y],
+    [g is 1-1 CORRESPONDENCE between Y and Z] 
+  =>[g o f is 1-1 CORRESPONDENCE between X and Z]
+- PAIRING FUNCTION - is a process encoding <x,y> (x,y IN NATURALs) to z (z IN NATURALS)
+- CANTOR PAIRING FUNCTION - (x+y)(x+y+1)/2 + y = z
+    used for proving that SET of RATIONAL NUMs is DENUMERABLE(COUNTABLY INFINITE)
+
+- INDICATOR FUNCTION - CHARECTERISTIC FUNCTION
+    FUNCTION DEFINED on a SET X that indicates membership of an ELEMENT in a SUBSET A of X,
+    having the VALUE 1 for all ELEMENTs of A and the VALUE 0 for all ELEMENTs of X not in A.
+      [ 1A(x) = x IN A => 1, else x NOT IN A => 0]
+
+- FINITARY OPERATION
+    an OPERATION that takes a FINITE number of input VALUES to produce an OUTPUT.
+- FINITARY ARGUMENT
+    one which can be translated into a FINITE SET of SYMBOLIC PROPOSITIONS starting from
+    a FINITE SET of AXIOMS. In other words, it is a PROOF (including all assumptions)
+    that can be written on a large enough sheet of paper.
+..... BY CONTRAST....
+- INFINITARY LOGIC studies LOGICS that allow INFINITELY long STATEMENTS and PROOFS.  
+
+- COMMUTATIVE b-OPERATION
+    changing the ORDER of ARGUMENTs does not matter.
+    (that is IMO.. ARGUMENT is not RELATION, but just SET)
+- IDENTITY b-OPERATION (for search  - IDENTITY OPERATION)
+  [from me]
+      <<a,1>, a>  or <<1,a>, a> - since b-OPERATION is 2-tuple of 2-tuple and element
+
+======== 15
+- DICHOTOMY is a partition of a SET into two parts (SUBSETs) that are:
+    . jointly exhaustive: everything must belong to one part or the other. AND
+    . mutually exclusive: nothing can belong simultaneously to both parts.
+
+- EQUINUMEROUS[ravnomoschnie] sets X, Y   - @x,y(x IN X, y IN Y) is ONE-TO-ONE CORESPONDENT
+- Bernstein THEOREM - (|X| = |Yj| TO Y, |Y| = |X1| TO X) => |X| = |Y|  or
+                        |X| <= |Y|, |Y| <= |X|  => |X| = |Y|
+- CARDINAL NUMBERS (- CARDINALS)
+- X, Y have the same CARDINAL NUMBERS if |X| = |Y| (EQUINUMEROUS)
+    is Z TO X, V TO Y,  if |X| = |V|, |Y| != |Z|  ...
+      ... => CARD NUM of X is smaller then CARD NUM of Y
+- DENUMERABLE = - COUNTABLY INFINITE
+- DENUMERABLE[schetnoe] if |X| = |N| (NATURAL NUMBERS SET). N have CARDINAL NUM aleph(N0)
+  ... CARDINAL NUM of all SUBSET of NATURAL NUMS SET is 2^^N0 (POWER OF CONTINIUM)
+- COUNTABLE[ne bolee chem schetnoe]  - FINITE or DENUMERABLE
+    any subset of DENUMERABLE set is COUNTABLE
+    (wiki)
+    S is COUNTABLE if there exists an INJECTIVE FUNCTION f from S to the
+    ... natural numbers N = {0, 1, 2, 3, ...}   >--|
+- COUNTABLY INFINITE (wiki) f = S->N   <-----------|
+    ... f is also SURJECTIVE and therefore BIJECTIVE => S is COUNTABLY INFINITE.
+- FINITE SET X  - X is empty set {} or equinumerous(==) with {1,...n}, n some integer>0
+
+- SEQUENCE( elements in RANGE is called TERMs)
+    in CompSc often called STRING - LIST or WORD
+- DENUMERABLE SEQUENCE  - FUNCTION whose DOMAIN is NATURALS
+            (most generally) Dom is  DENUMERABLE TOTALLY ORDERED SET
+                    - STREAM in CompSc
+- FINITE SEQUENCE   -  FUNCTION whose DOMAIN is {0..n}
+            (most generally) Dom is  COUNTABLE TOTALLY ORDERED SET
+- RECURSIVE SEQUENCE
+    in some SEQUENCES, we get the next TERM by doing some OPERATIONS in the previous TERM
+
+- RECURSIVE SET - COMPUTABLE SET - DECIDABLE SET - SOLVABLE SET
+|S of the NATURALs is called RECURSIVE if there exists a TOTAL COMPUTABLE FUNCTION f
+|such that f(x)=1 if x ∈ S and f(x)=0 if x ∉ S. In other words,..
+|the set S is RECURSIVE <=> the INDICATOR FUNCTION 1S is COMPUTABLE.
+|                                                                            [that is ...]
+|   there is an algorithm which terminates after a finite amount of time and
+|   correctly decides whether or not a given number belongs to the set.
+|--PENROSE--
+  also this NATURAL NUM can be encoded ALGORITHM and some DATA for this ALGORITHM
+
+- ENTSCHEIDUNGSPROBLEM    (--PENROSE--)
+| GYLBERT asks:    whether exist ALGORITHM for solving math tasks of some class
+| TURING rephrase it as follows: whether exist ALGORITHM what decide,
+|     whether some THURING MACHINE what receive some INPUT DATA will be stopped
+| (wiki)
+|   a STATEMENT is UNIVERSALLY VALID  <=>  it can be DEDUCED from the AXIOMS,
+|   so the ENTSCHEIDUNGSPROBLEM can also be viewed as asking for an ALGORITHM
+|   to decide whether a given STATEMENT is PROVABLE from the AXIOMS using the RULES of LOGIC.
+|
+|   only RECURSIVELY defined SET of AXIOM can be - DECIDABLE
+|        [  RECURSIVE SET      ]
+| 
+|   Using some encoding, such as a GODEL NUMBERING, the STRINGS can be encoded as NATURALs.
+|   => a DECISION PROBLEM informally phrased in terms of a FORMAL LANGUAGE
+|      is also EQUIVALENT to a SET of NATURAL NUMBERS. 
+
+
+  let @x,y1..yn IN NATURAL NUMs P(x,y1..yn) is RELATION on the SET of NATURALS,
+    P may involve only x and be a PROPERTY
+- PRINCIPLE OF MATH INDUCTION
+    [P(0,y1..yn) ], [@k P(k,y1..yn) ->  P(k+1,y1..yn)] ...
+    ... |- [(@x IN NATURALS) P(x,y1..yn)]
+    in the course of this DEDUCTION  ...
+      P(n,y1..yn) - INDUCTIVE HYPOTHESES  - START PROPOSITION
+    - HYPOTHESIS in the INDUCTIVE STEP that the STATEMENT HOLDS for some n
+      (that is... we should prove P(0), P(n)->P(n+1); here P(n) is HYPOTHESIS)
+
+- PROOF PROCEED by INDUCTION on x
+- PROOF by INDUCTION on x  - when P actually involves y1..yn, other then x
+    this induction princople holds TRUE for [@x](x > n).
+  ... example on p.44 (DEDUCTION THEOREM)
+- PRINCIPLE OF COMPLETE(STRONG) INDUCTION  (@x IN NATURALS)
+  (any)@x, @u < x  P(u,y1..yn) -> P(x,y1..yn)   |- @x P(x,y1..yn)   or
+       @x, @u <=x  P(u,y1..yn) -> P(x+1,y1..yn) |- @x P(x,y1..yn)
+
+======== 16
+
+- PARTIAL ORDER without reflexion  
+    b-relation R, R is TRANSITIVE, @x in FIELD !(xRx) !(xRy, yRx)
+                                 ---{that is only TRANSITIVE}
+  [wiki] by wiki it is SET + b-RELATION on this SET
+- POSET
+- REFLEXIVE PARTIAL ORDER  - PART ORDER & (@x IN R <x,x>)
+      xRx               REFLEXIVE
+      xRy, yRx => x=y   ANTISYMMETRIC
+      xRy, yRz => xRz   TRANSITIVE
+                (now PARTIAL ORDER in most cases mean REFLEXIVE PART ORDER)
+
+  F is FIELD of R, @x,y,  x IN F, y IN F
+- TOTAL ORDER - LINEAR ORDER  (sometimes just ORDERED SET)
+- (REFLEXIVE) TOTAL ORDER - (REFLEXIVE) PARTIAL ORDER, such that
+        x=y ^ xRy ^ yRx, (wiki=xRy;yRx) => COMPARABLE
+                    ---(REFLEX){TRANSITIVE, ANTISYMMETRIC, TOTAL}
+      xRy, yRx => x=y   ANTISYMMETRIC
+      xRy, yRz => xRz   TRANSITIVE
+      x=y^xRy^yRx       - TOTAL - COMPARABLE (in wiki writtne xRy;yRx, but it's shitty def)
+          also (xRy ; yRx) => xRx   that is REFLEXIVE
+
+      !!!(Фактически мендельсон определяет строгий тотал ордер и в принципе его
+      как по мне и имеет смысл обьявлять бо я нихуя не пойму в чем соль обычного
+      тотал ордера, он хуйня какаято, а так по мендельсоновскому определению
+      получаетмя что посет это <= a тосет это <, и это имеет смысл, бо иначе
+      разницы между тосетом и посетом никакой, тосет это a<b^b<a^(a,b это одно и тоже))
+      посет это два елемента могут расматриваться как имеющие общее значение
+
+- LINEAR EXTENSION
+    Given extension REFL POSET to REFL TOSET, that is REFLECTION to TOTALITY
+
+- STRICT TOTAL ORDER  - R is TOTAL, R' is STRICT TOTAL, then
+      aR'b <=> aRb, a!=b   
+
+    (INTEGER, <) - TOTAL ORDER, (INTEGER, <=) - REFLEXIVE TOTAL ORDER
+    X = INTEGER, ({X...}, PTO) - PARTIAL ORDER , ({X...}, TO) - REFLEXIVE PARTIAL ORDER
+
+
+- DUAL PARTIALLY ORDERED SET - OPPOSITE ORDERED SET
+- INVERSE ORDERED SET
+- every PARTIALLY ORDERED SET P gives rise to a DUAL (or OPPOSITE) PARTIALLY ORDERED SET
+  which is often denoted by Pop or Pd. This DUAL ORDER Pop is defined to be the SET with the INVERSE ORDER,
+  i.e. x ≤ y holds in Pop <=> y ≤ x holds in P.
+
+    P is POSET
+- LEAST ELEMENT    m  - @a IN P,  mRa
+- GREATESt ELEMENT g  - @a IN P,  aRg
+
+  R is b-RELATION, F is FIELD of R, B TO F, y IN B, z IN B
+- R-LEAST ELEMENT (tipa kak element co)
+      y is R-LEAST ELEMENT of B  if  [@z, yRz  (y != z)]
+- WELL-ORDERING RELATION 
+- WELL-ORDER   - TOTAL ORDER where ...
+  ... (@S S TO F, S != {}   S has R-LEAST ELEMENT)
+
+- ORDER ISOMORPHISM - ISOMORPHISM
+    A, B TOTAL ORDERED b-RELATIONs, f:A->B is ISOMORPHISM A on B
+    if f is BIJECTION, and (@x,y, x IN A, y IN A)[x <= y => f(x) <= f(y)]
+- ORDER TYPE
+    (REFLEXIVE)TOTAL ORDERED SETs X,Y are said to have the same ORDER TYPE just when they are
+    ORDER ISOMORPHIC, that is, when there exists a BIJECTION  f: X → Y such that
+    both f and its inverse are STRICTLY INCREASING
+
+    if f,g ISOMORPHISM f:A->B, g:B->C, then (f o g):A->C
+
+- ORDINAL NUMBER - ORDER TYPE of WELL-ORDERED SET
+    they are usually identified with HEREDITARILY TRANSITIVE SETs
+
+    every WELL-ORDERED SET (S,<) is ORDER ISOMORPHIC to the SET of ORDINALs less than
+    one specific ORDINAL NUMBER [the ORDER TYPE of (S,<)] under their NATURAL ORDERING.
+
+    least INFINITE ORDINAL is ω, which is identified with the CARDINAL NUMBER aleph(N0)
+
+    (one of conclusion from Paradox Burali-Forti)
+    non-existence of SET of all ORDINALS contradict to NAIVE SET THEORY, because
+    show inability to built SET by using some PRORERTY like S = {x, P(x)}
+
+- TRANSFINITE NUMBERS
+    As with FINITE NUMBERs, there are two ways of thinking of TRANSFINITE NUMBERs,
+    as ORDINAL and CARDINAL numbers. Unlike the FINITE ORDINALs and CARDINALs,
+    the TRANSFINITE ORDINALs and CARDINALS define different classes of numbers.
+      . ω(omega) is defined as the lowest TRANSFINITE ORDINAL NUMBER and is
+        the ORDER TYPE of the NATURALs under their usual LINEAR(TOTAL) ORDERING.
+      . Aleph(N0) is defined as the first TRANSFINITE CARDINAL NUMBER and is the
+        CARDINALITY of the INFINITE SET of the NATURAL NUMBERs.  If the
+        AXIOM of CHOICE holds, the next higher CARDINAL NUMBER is aleph(N1)
+
+- PURE
+- HERADITARY PROPERTY
+    PROPERTY of an object, that inherits to all its subobjects,
+    where the term subobject depends on the context.
+    In SET THEORY @x, x IN X, x is HEREDITARY  =>  X is HEREDITARY
+    It's VACUOUSLY true that the {} - HEREDITARY SET => {{}} - HEREDITARY SET =>
+    => {{}, {{}}} - HEREDITARY SET
+
+    In formulations of SET THEORY that are intended to be INTERPRETED in the von Neumann
+    universe or to express the content of Zermelo–Fraenkel SET THEORY, all SETs are HEREDITARY,
+    because the only sort of object that is even a candidate to be an ELEMENT of a SET
+    is another SET. Thus the notion of HEREDITARY SET is interesting only in a context
+    in which there may be URELEMENTs.
+      
+- URELEMENT - UR-ELEMENT - ATOM
+    is an OBJECT (concrete or abstract) that is not a SET, but that may be an ELEMENT of a SET.
+
+- VACUOUS TRUTH   -  STATEMENT that asserts that all MEMBERs of the EMPTY SET
+    have a certain PROPERTY. Examp. the STATEMENT "all cell phones
+    in the room are turned off" may be true simply because there are no cell
+    phones in the room"
+    
+
+- MONOTONE FUNCTION
+- MONOTONIC FUNCTION    - FUNCTION between ORDERED SETs that preserves the given order
+- ORDER ISOMORPHISM   - special kind of MONOTONE FUNCTION that constitutes a
+     suitable notion of ISOMORPHISM for PARITALLY ORDERED SETS 
+
+  WELL-ORDER R, X is FIELD of R, P is PROPERTY 
+- PROOF by TRANSFINITE INDUCTION  ...
+  ... @u,z IN X, (<zRu> IN P) => <u> IN P |- @x IN X  <x> IN P
+  ... and if X is INFINITE
+
+    X can be WELL-ORDERED if exist WELL-ORDER whose FIELD is X
+  
+  It is assumed to be useful in modern math, but considered as controversial
+- WELL-ORDERING PRINCIPLE   - every SET can be WELL-ORDERED
+  WELL-ORDERING is equivalent(given the usual AXIOMs of SETs THEORY) to ...
+  ... AXIOM OF CHOICE (
+    for any set X of non-empty PAIRWISE DISJOINT SETs, there is a set Y
+    (called a CHOICE SET) that contains exactly one ELEMENT in common with each SET in X.
+  )
+
+  B is non-empty SET, f:B->B, g:(B^^2)->B(BINARY OPERATION), x' = f(x), x&y = g(x,y).
+- BOOLEAN ALGEBRA  - <B,f,g>  if |B| >= 2  and following conditions is satisfied:
+  @x,y,z IN B
+     1. x&y = y&x
+     2. (x&y)z = x&(y&z)
+     3. [x&y = x] <=> [x&y' = z&z']  
+  from this follows
+    x||y stand for (x'&y')', and write x<=y for x&y=x
+    @z,w IN B z&z'=w&w', we denote z&z' by 0, 1 as 0',  then @z  z||z'= 1.
+    Note also that <= is REFLEXIVE PARTIAL ORDER on B, and <B,f,&> is Boolean Algebra
+    & || 1 0 should not be confused this identical symbod in arithmetic and set theory
+
+- IDEAL J in <B,f,g>    - non-empty subset of B such that ...
+  ... [x, y IN J] => [x||y IN J], [x IN J, y IN B] => [x&y IN J]
+    {0} and B are ideals.
+- PROPER IDEAL    - IDEAL different from B.
+- MAXIMAL IDEAL   - PROPER IDEAL  that included in no other ideal
+    J is PROPER IDEAL
+  [ @u IN B, (u IN J) or (u' IN J) ] <=> J is MAXIMAL IDEAL 
+
+======= 17   read up to the end about Boolean algebra(one paragraph[abzac])
+
++++++++++++++++++ THE PROPOSITIONAL CALCULUS +++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+=============== 1.1. Propositional connectives. Truth tables.  =================
+======= 18
+
+- TRUTH-FUNCTIONAL combination of SENTENCE -
+    is comb. of sent. in which the TRUTH or FALSITY of the new SENTENCE
+    is determined by the TRUTH or FALSITY of its COMPONENT SENTENCES.
+
+- TRUTH FUNCTIONAL SENTENCE (most likely)
+- LOGICAL FORM of [SENTENCE | SET of SENTENCE]
+- PROPOSITION is a TYPE of LOGICAL - STATEMENT = 
+              (abstraction from semantics of senteces)[that is (may) have only logic semantic](wiki)
+- SENTENCE(in genereal) - CLOSED FORMULA(in general)
+- CLOSED SENTENCE see on (page64)
+    In MATHEMATICAL LOGIC, a SENTENCE of a PREDICATE LOGIC is a BOOLEAN-VALUED
+    WELL-FORMED FORMULA with no FREE VARIABLES. A SENTENCE can be viewed as
+    expressing a PROPOSITION, something that may be TRUE or FALSE.
+- OPEN SENTENCE - NON-CLOSED FORMULA(in logic)
+    is described as "OPEN" in the sense that its TRUTH VALUE is meaningless until its VARIABLEs
+    are replaced with specific VALUE, at which point the TRUTH VALUE can usually be determined
+      (and hence the sentences are no longer regarded as "open").
+    - NON-CLOSED FORMULA(in logic)
+      in MATH LOGIC is a WFF which contains FREE VARIABLEs.
+      (Note that in logic, a "SENTENCE" is a formula without FREE VARIABLEs, and a FORMULA
+      is "OPEN" if it contains no QUANTIFIERs, which disagrees with the terminology of this article.)
+      Unlike CLOSED FORMULAs, which contain CONSTANTs, NON-CLOSED formulas do not express PROPOSITIONs;
+      they are neither TRUE nor FALSE.
+
+- ATOMIC SENTENCE - ATOM (def on p22)
+    is a FORMULA(PROPOSITIONAL or PREDICATE) with no deeper PROPOSITIONAL structure
+  ..that is, a FORMULA that contains no LOGICAL CONNECTIVES.
+  ..that is, those SENTENCEs(PROPOSITONs) that are not built up from another PROPOSITIONs.
+
+- LOGICAL CONSTANT
+- LOGICAL SYMBOL of a language L
+    is a SYMBOL that has the same semantic VALUE under every interpretation of L.
+    Two important types of LOGICAL CONSTANTS are - LOGICAL CONNECTIVES and - QUANTIFIERS. (p 42)
+
+- NON-LOGICAL CONSTANT - CONSTANTs
+  - NON-LOGICAL SYMBOL  - only has meaning or [logical]semantic content when one
+                          is assigned to it by means of an INTERPRETATION
+- NON-LOGICAL SYMBOLS of a LANGUAGE of FIRST-ORDER logic consist of PREDICATES and INDIVIDUAL CONSTANTS
+
+- PROPOSITIONAL CONSTANTS   -represent some particular PROPOSITION.
+- PROPOSITIONAL VARIABLES   -range over the SET of all ATOMIC PROPOSITIONS.
+
+- LOGICAL FORM of an ARGUMENT is called the ARGUMENT FORM or TEST FORM of the ARGUMENT.
+
+  ARGUMENT in a FORMAL LANGUAGE shows the LOGICAL FORM of the symbolically
+  represented of natural language ARGUMENTS obtained by its INTERPRETATIONS.
+
+- PREMISE is a PROPOSITION that an ARGUMENT claims will induce or justify a CONCLUSION.
+    In logic, an ARGUMENT requires a SET of (at least) two declarative SENTENCES
+    known as the PREMISES along with another declarative sentence known as the CONCLUSION.
+- INTERPRETATION     (here considered INTERPRETATION FUNC. but formally it is a SET)
+    FUNCTION that provides the EXTENSION of symbols and strings of symbols of an OBJECT LANGUAGE. 
+    (page 63)
+      WFF have meaning only when an INTERPRETATION is given for the SYMBOL.
+  INTERPTETATION    - is an assignment of meaning to the SYMBOLS of a FORMAL LANGUAGE.
+    (in logic as I understood is T or F)
+    INTERPRETATION FUNCTION could take the PREDICATE T (for "tall") and ASSIGN it
+    the EXTENSION {a} (for "Abraham Lincoln"). All our INTERPRETATION does is assign
+    the EXTENSION {a} to the NON-LOGICAL CONSTANT T, and does'nt make a claim about whether T
+    is to stand for tall and 'a' for Abraham Lincoln. Nor dous LOGICAL INTERPRETATION have anything
+    to say about LOGICAL CONNECTIVES like , ; !. Though we may take these symbols to stand for
+    certain things or concepts, this is not determined by the INTERPRETATION FUNCTION.
+    ... W is FORMAL LANG what defined with alphabet a = {Q, o}
+        WORLD begins with Q, composed solely of Q,o => WORLD in W
+        possible INTERPRETATION of W would ASSIGN the decimal '1' to Q, '0' to o
+        => QoQ denote 101 under this INTERPETATION of W
+    FORMAL LANGUAGEs used in mathematics, logic, and theor. comp science are defined
+    in solely SYNTAСTIC TERMS, and as such do not have any meaning until they are given some INTERPRETATION.
+
+- FORMAL SEMANTIC( - SEMANTIC)   - general study of INTERPRETATIONs of FORMAL LANGUAGES.
+- TRUTH FUNCTIONAL INTERPRETATIONs  - INTERPRETATION
+    associate each SENTENCE in a FORMAL LANGUAGE with a single TRUTH VALUE,
+    either TRUE of FALSE.(ex. of INTERPRETATION of PROPSITIONAL and PREDICATE LOGIC)
+- MODEL
+    INTERPRETATION often provides a way to determine the TRUTH VALUES of SENTENCEs in a LANGUAGE.
+    If a given INTERPRETATION assigns the VALES TRUE to a SENTENCE or THEORY, the INTERPRETATION
+    is called a MODEL of that SENTENCE or THEORY.
+- EXTENSION of a PREDICATE – a TRUTH-VALUED FUNCTION – is the SET of (n-)TUPLES of
+    VALUES that, used as ARGUMENTS, satisfy the PREDICATE.
+    Such a SET of TUPLES is a RELATION.
+
+- EVALUATION ([about computer expression] accord to  gent intro to hask)
+- REDUCTION   - refers to the REWRITING of an EXPRESSION into a simpler form.
+    see examp. in 'comp science txt part' NORMAL FORM
+
+- NEGATION - CONJUCTION - DISJUNCTION,
+- CONDITIONAL(- IMPLICATION - MATERIAL CONDITIONAl)
+- BICONDITIONAL ...
+      ... - TRUTH FUNCTIONAL OPERATIONS on sentences - LOGICAL OPERATORS - BINARY OPERATORS
+          - PROPOSITIONAL CONNECTIVES - LOGICAL CONNECTIVES(symbols)
+
+======== 19
+- LOGICAL CONNECTIVES - PROPOSITIONAL CONNECTIVES symbols:   !, &, ||, ->, <->
+
+  A,B   - here A and B is - CONJUNCTS
+  A;B   - here A and B is - DISJUNCTS
+  A->B  - here A is - ANTECEDENT and B is - CONSEQUENT
+      this LOGICAL CONNECTION have no causal relationship,
+      in contrast to LOGIGAL CONSEQUENCE
+  (see - non-truth-functional exampl. on p19)
+
+- STATEMENT LETTERS
+- PROPOSITIONAL VARIABLES   - variable which can either be TRUE or FALSE
+
+======= 20 
+here FORMAL LANG is not defined yet, but (IMO) this definition can be considered as - WFF
+- STATEMENT LETTERs
+- PROPOSITIONAL FORM
+- STATEMENT FORM to an EXPRESSION built up from the STATEMENT LETTERs A,B,C, and so on by
+    appropriate applications of the PROPOSITIONAL CONNECTIVEs. 
+
+    1. All STATEMENT LETTERs (capital italic letters) and such letters with numerical
+      subscriptst are STATMENTT FORMs.
+    2. If B and C are statement forms, then so are (!B), (B,C), (B;C), (B->C),
+    and (B<->C).
+    3. Only those EXPRESSIONs are STATEMENT FORMs that are determined to be so
+    by means of conditions 1 and 2. ***
+
+  *** This can be rephrased as follows C is a STATEMENT FORM <=> there is a
+  FINITE SEQUENCE B1..Bn(n >= 1) such that Bn = C and, if (1<=i<=n)Bi is either
+  STATEMENT LETTER or a NEGATION, CONJUNCTION, DISJUNCTION, CONDITIONAL or BICONDITIONAL
+  constructed from previous EXPRESSIONs in the SEQUENCE. Notice that we use script
+  letters A,B.. to stand for arbitrary expressions, whereas
+  !!!(italic letters) are used as STATEMENT LETTERs.
+
+======= 21 - 22
+- PRINCIPAL CONNECTIVE of a STATEMENT FORM - CONNECTIVE that is applied last
+  in construction of the FORM (main in TRUTH TABLE)
+
+  for every ASSIGNMENT of TRUTH VALUEs T or F to the STATEMENT LETTERs that
+  occur in a STATEMENT FORM, there corresponds, by virtue of the TRUTH TABLEs
+  for the PROPOSITIONAL CONNECTIVEs.  thus .. 
+  each STATEMENT FORM determines a TRUTH FUNCTION what can be graphically
+  represented as TRUTH TABLE
+
+- TRUTH FUNCTION
+  STATEMENT FORM containing n STATEMENT LETTERS generates a corresponding TRUTH FUNCTION of n args.
+    - LOGICALLY EQUIVALENT FORMS generate the same TRUTH FUNCTION
+
+- ARGUMENTS - TRUTH VALUES
+- TRUTH FUNCTION of n- ARGUMENTS   - a function of n ARGUMENTS,
+    the ARTUMENTS and VALUES of which are the TRUTH VALUES {T,F} or {1,0}
+  (more precise definition see on p22)
+
+
+
+================== 1.2 Tautologies. ============================================
+======= 23
+- TAUTOLOGY   - PROPOSITIONAL FORM that is alway TRUE for all TRUTH VALUES....
+      B is TAUTOLOGY <=> (!B) is CONTRADICTORY
+    [exmp.] A ; (!A)   LAW of the EXCLUDED MIDDLE
+            !(A, !A)     A <-> !(!A)
+            (A,B) -> A   A -> (A;B)
+            [A ; (B <-> C)]  <=> (A;B) <-> (A;C)
+
+        B1..Bn C1..Cn is a STATMENT LETTERS of STATEMENT FORM B and C.
+
+  (wiki)
+      The - TEE symbol T is sometimes used to denote an arbitrary TAUTOLOGY,
+      with the dual symbol _|_ (- FALSUM) representing an arbitrary CONTRADICTION.
+
+      In the context of PREDICATE logic, many authors define a TAUTOLOGY to be a
+      SENTENCE that can be obtained by taking a TAUTOLOGY of PROPOSITIONAL LOGIC
+      and uniformly replacing each PROPOSITIONAL VARIABLE by a first-order formula
+      (one FORMULA per PROPOSITIONAL VARIABLE)
+    (/wiki)
+
+- LOGICAL CONSEQUENCE - LOGICALLY IMPLY - ENTAILMENT
+- SYNTACTIC CONSEQUENCE (most likely)
+- B LOGICALLY IMPLY C 
+- C is LOGICAL CONSEQUENCE of B <=> 
+    for every TRUTH assignment of B1..Bn and C1..Cn --- B is TRUE => C is TRUE
+    [exmp.]     (A,B) |- A,    A |- A;B   A, (A->B) |- B
+
+- B and C are - LOGICALLY EQUIVALENT  <=>  B and C receive the same TRUTH value
+    for every TRUTH assignment of B1..Bn and C1..Cn --- B,C has the some TRUTH values
+
+  (zacony v logice facticheski 9vl9uts9 paroy of LOGICALLY EQUIVALENT STATEMENT FORM)
+
+  .PROPOSITION 1.1 (metatheorem)
+    (a) A |- B   <=>   A->B is TAUTOLOGY.
+    (b) B LOGICALLY EQUIVALENT C   <=>   B <-> C  is TAUTOLOGY
+        here we receive another way(besides TRUTH TABLES) to determine 
+        whether STATEMENT FORM is TAUTOLOGY.
+
+======= 25
+- CONTRADICTORY STATEMENT FORM   -
+    PROPOSITIONAL FORM that is FALSE for all possible TRUTH VALUES of STATEMENT LETTERS.
+    [exmp.]  A <-> !A   A, !A
+    B is TAUTOLOGY <=> (!B) is CONTRADICTORY
+- LOGICALLY CONTINGENT
+     A formula that is neither a tautology nor a contradiction
+
+- LOGICALLY TRUE STATEMENT  - STATEMENT that ARISE FROM TAUTOLOGY by
+    ...substitution of STATEMENTS LETTERS by individual PROPOSITON for
+    ...every STATEMENT LETTER
+- LOGICALLY FALSE   - STATEMENT that ARISE FROM CONTRADICTORY
+      ...STATEMENT(PROPOSITIONAL) FORM
+
+======== 26
+.PROPOSITION 1.2 (metatheorem)
+    [B is TAUTOLOGY, (B->C) is TAUTOLOGY]  |-  [C is TAUTOLOGY]
+      [from me](it is useful, since when we make conclusion from an axiomatic schema
+                by using modus ponenc, then we receive new tautologies, that is theorem)
+
+- ARISE FROM  - SUBSTITUTION(by smullyan)
+.PROPOSITION 1.3 (metatheorem)
+    F(A1..An)  -  STATEMENT FORM containing STATEMENT LETTERS A1..An
+    B arise from F by substituting STATEMENT FORM B1..Bn for A1..An
+    F is TAUTOLOGY |- B is TAUTOLOGY
+  smullyan:
+    by smullyan THEOREMS can be DERIVED from AXIOMS or others THEOREMS by
+    MODUS PONENS or SUBSTITUTION
+    | but in this smullyan definition AXIOMs is not AXIOM SCHEMA,
+    | and in another definition(by Neumann) smullyan defien using
+    | AXIOM SCHEMA and exclude SUBSTITURION (page21 in smullyan)
+
+    it is used for FORMAL PROVING almost ALL THEOREMs (like: prove X->X)
+
+.PROPOSITION 1.4 (metatheorem)
+  S1 ARISE FROM B1, by substituting of S for one or more occurrences of B
+    => (B<->S) -> (B1<->S1) is TAUTOLOGY
+    => [(B<=>S) => (B1<=>S1)]  (*here <=> is logic. equiv.)
+  [exmp.]   B1 = C;D    B = C   S = !(!C)   then  S1 = !(!C) ; D
+  since !(!C) <=> C  that is LOGICALY EQUIVALENT
+  |-  B1 <=> C1
+
+======== 30
+- DUALITY (example task)
+  B,C is STATEMENT FORM involving only ! , ;
+  B',C' results from B by replacing each , ; by ; ,  (i.e. exchenge)
+  [B is TAUTOLOGY] => [!B' is TAUTOLOGY]
+  [B'=>C' is TAUTOLOGY] => [B=>C is TAUTOLOGY]
+  [B'<=>C' is TAUTOLOGY] => [B<=>C is TAUTOLOGY]
+(wiki)
+  [ A(!x) = !B(x) ] => FUNCTIONs or RELATIONs A, B are considered DUAL
+  The basic DUALITY of this type is the duality of the $ and @ quantifiers in classical logic.
+  These are DUAL because $x.!P(x) and !@x.P(x) are EQUIVALENT for all predicates P in classical logic.
+
+
+============= 1.3 Adequate sets of connectives. ================================
+======== 34 
+(wiki)
+- MINIMAL FUNCTIONALLY COMPLETE SET of LOGICAL CONNECTIVES   -
+    minimal set of OPERATORS that can express every PROPOSITION
+    expressible in the PROPOSITIONAL CALCULUS 
+- FUNCTIONALLY COMPLETE SET of LOGICAL CONNECTIVES or BOOLEAN OPERATORS is one
+  which can be used to express all possible TRUTH TABLES
+(/wiki)
+
+- ADEQUACY  - SET of LOGICAL CONNECTIVES or BOOLEAN OPERATORS is one which can be
+  used to express all possible truth tables by combining MEMBERS of the SET into
+  a BOOLEAN EXPRESSION.
+- FUNCTIONAL COMPLETENESS - more generic kind of ADEQUACY(not only PROPOSITIONAL
+  logic)
+
+  Every STETEMENT FORM containing n STATEMENT LETTERS  GENERATEs a corresponding
+  TRUTH FUNCTION of n ARTUMENTS. The ARTUMENTS and VALUES of the
+  FUNCTION are T or F. LOGICALLY EQUIVALENT FORMS generate the same TRUTH FUNCTION
+  ?(question)? whether all truth functions are so GENERATEd ? -|
+                                                               |
+  .PROPOSITION 1.5 (metatheorem)                             <-|
+  every TRUTH FUNCTION is generated by a STATEMENT FORM involving  ! , ;
+
+======== 36
+
+  .COROLLARY 1.6
+  every TRUTH FUNCTION can be generated by a STATEMENT FORM   
+  ... containing only as connectives only  (, !)  or only  (; !)  or only  (-> !)
+  ...      [that is this pairs are ADEQUATE for construction all TRUTH FUNCTIONS]
+  ^   .P 1.5 and ............proof!
+  | (, !)  a;b <=> !(!a,!b)
+  | (; !)  a,b <=> !(!a;!b)
+  | (=> !) a;b <=> !a=>b   a,b <=> !(b->!a)  here b->!a <=> b .| a
+  |
+  | JOINT DENIAL and ALTERNATIVE DENIAL  do the same work alone!
+
+- JOINT DENIAL (- strelka pierce - PIERCE ARROW)            NOT AND
+      ... ADEQUACY is follows from TAUTOLOGIES
+      !A <=> A .| A   A,B <=> [ (A.|A) .| (A.|A) ] 
+- ALTERNATIVE DENIAL (- shtrich sheffera - SHEFFER STROKE)   NOT OR
+      ... ADEQUACY is follows from TAUTOLOGIES
+      !A <=> A | A   A;B <=> [ (A|A) | (A|A) ]
+
+  .PROPOSITION 1.7 (metatheorem)
+  | and .| are alone CONNECTIVES that ADEQUATE for construction of all TRUTH FUNCTIONS
+      
+======== 37
+
+- LITERAL   - is a STATEMENT LETTER or NEGATION of a STATEMENT LETTER
+- DISJUNCTIVE NORMAL FORM (- DNF)   - DISJUNCTION  of one or more DISJUCNTS,
+  ... each of which is a CONJUNCTION of one or more LITERALS
+- CONJUNCTIVE NORMAL FORM (- CNF)   - CONJUNCTION of one or more CONJUNCTS,
+  ... each of which is a DISJUNCTION of one or more LITERALS
+
+  - DEGENERATE CONJUNCTION - DEGENERATE DISJUNCTION (virojedenniy pustoy)
+  this terminology considers a LITERAL to be a (DEGENERATE) CONJUNCTION and a (DEGENERATE) DISJUNCTION.
+
+======== 38
+
+- FULL CNF(DNF)   - no DISJUNCT(CONJUCT) what contains two OCCURRENCES of LITERALS
+    ... with same letters
+
+- REFUTABLE - PROVABLE
+  w is refutable means by definition "¬w is provable""
+- CONSISTENT STATEMENT FORM   (page34, zadacha 1.35, but I not sure about this)
+    if FORM is TRUE for $!x, in <..> ASSIGNMENT of TRUTH VALUES
+- SATISFIABLE STATEMENT FORM  
+    if FORM is TRUE for some($x, x IN <..>) ASSIGNMENT of TRUTH VALUES to its STATEMENT LETTERS
+
+  The problem of determining the SATISFIABILITY of an arbitrary CNF plays an important role
+  in the theory of COMPUTATIONAL COMPLEXITY; it is an example of a so-called
+  NP-COMPLETE PROBLEM.
+
+======== 39
+
+- RESOLUTION - RESOLUTION RULE
+  B is CNF (B1, B2, B3), C is STATEMENT LETTER
+  ... if C is DISJUNT of DISJUNTION B1, and !C of DISJUNCTION  B2 => a non-empty DISJUNCTION
+  ... obtained from B1 and B2 by eliminating C and forming a new DISJUNCTION
+  ... is said to be obtained from B BY RESOLUTION ON C.
+  [1](A;!C;!B), [2](!A;D;!B), [3](C;D;A)  => [13](A;!B;D) BY C  [12] by A [23] BY A
+  so (A;!C;!B), (!A;D;!B), (C;D;A), (A;!B;D), (!C;!B,D), (D;!B;C), (!B;D)
+
+    res[ (A;!B),B ] = A,B (eto 9 ne metodom resol, a zaconami logiki not tak pravilno)
+                          hot9 po resolutsii doljnoka bit vrode A, moj 9 woto putau
+    (A;C),(!A;B),(A;!C),(!A;!B) toj interesno
+
+- BLATANT CONTRADICTION   - B is CNF in form like (A;B), B, (C;D), !B
+  if B is UNSATISFIABLE <=> RES(B) is BLATANT CONTRADICTION
+
+- TAUTOLOGICAL IMPLICATION - TAUTOLOGICAL COSEQUENCE     (R and S -  STATEMENT FORM)
+    every valuation that causes R to be TRUE also causes S to be TRUE =>
+     => R TAUTOLOGICALLY IMPLY S 
+     this situation is denoted as R |= S (equivalent to R->S is TAUTOLOGY)
+
+- INTERPOLANT
+- CRAIG'S INTERPOLATION THEOREM   - B and D have B1..Bn STATEMENTS LETTERS in common,
+    there is C have only B1..Bn  such that  "" (B->D), (D->C)  is TAUTOLOGY ""
+  (wiki) 
+   | |= F->W  =>  |= (F->P),(P->W) , where
+   |   atoms(F), atoms(W), atoms(P)  - all NON-LOGICAL SYMBOLS in F,W,P
+   |              is the set of propositional variables occurring in [F|W|P]
+   | atoms(P) TO [ atoms(F) & atoms(W)]
+ .CONSTRUCTIVE PROOF  by INDUCTION  (- CONSTRUCTIVE PROOF example)
+    Induction Base: |atoms(F)-atoms(W)| = 0  |- F=>F, F=>(P={})=>W
+    N step: assumed |atoms(F)-atoms(W)| = n  is inductive that the result has been
+      show for all x<=n( for example 0)
+
+    now assume that |atoms(F)-atoms(W)| = n+1,  p IN atoms(F) but NOT IN atoms(W)
+    F'' = F[T/p] ; F[F/p]   F[T/p] is the same as F but p always T, F[F/p] conversely
+    p1. |=  F''->W , ... (if convert to CNF we can obtain (F;N),(F;!N), and use RESOLUTION)
+            ... since [|atoms(F)-atoms(W)| = n(0 for example)] -> W   from base step
+    p2. [|atoms(F'')-atoms(W)| = n] 
+    p3. |=  F->F''
+    p4. p1,p2 |=  F''-> P
+    p5. |=  P->W
+    p6. |=  F->P
+    -----------------Hence, P is a suitable INTERPOLANT for F and W
+
+    1.46 The Hardest Logic Puzzle Ever 
+
+=============== 1.4 AN AXIOM SYSTEM FOR THE PROPOSITIONAL CALCULUS ============
+
+======== 41
+
+[wiki]
+suppose L1 and L2 are FORMAL LANGUAGEs over some common ALPHABET.
+- CONCATENATION L1L2 consists of all STRINGS of the FORM vw where v is a string
+                                                  from L1 and w is a string from L2.
+- INTERSECTION L1 ∩ L2 of L1 and L2 consists of all STRINGS
+                                                which are contained in both LANGUAGES
+- COMPLEMENT ¬L of a LANGUAGE with respect to a given ALPHABET consists of all strings
+                                            over the ALPHABET that are not in the LANGUAGE.
+- KLEENE STAR(free monoid): the LANGUAGE consisting of all WORDS that are CONCATENATIONS of 0 or more WORDS
+                                                                        in the original LANGUAGE
+- REVERSAL:
+  | Let e be the empty word, then eR = e, and
+  | for each non-empty word w = x1…xn over some alphabet, let wR = xn…x1,
+  | then for a formal language L, LR = {wR | w ∈ L}.
+
+- STRING HOMOMORPHISM
+  is a STRING substitution such that each LETTER is replaced by a single STRING.
+  That is, f(a)=s, where s is a string, for each LETTER a
+[/wiki]
+
+- FORMAL THEORY - FORMAL SYSTEM - FINITATY SYS - THEORY which is expressed in - FORMAL LANGUAGE.
+- EXPRESSION - WORD - STRING (in smullyan - LINEAR SEQUENCE or  just "ORDERED n-TUPLE")
+- WELL-FORMED FORMULA( - WFF) - WELL-FORMED (- WF)
+- AXIOMATIC THEORY - AXIOMATIC SYSTEM
+- RULES of INFERENCE
+- FOLLOW FROM - DIRECT CONSEQUENCE - CONSEQUENCE
+- FORMAL THEORY (FORMAL SYSTEM) L is defined when the following conditions are satisfied:
+  1. a COUNTABLE SET of SYMBOLS is given as L(ALPHABET).  ('SYMBOLS' may be thought of
+       as arbitrary objects rather than just linguistic objects).
+     a FINITE SEQUENCE of SYMBOLS of L is called EXPRESSION of L.
+  2. there is SUBSET of SET of EXPRESSIONS of L called the SET of WELL-FORMED FORMULAS(WFFs) of L.
+      there is USUALLY an effective PROCEDURE to determine whether a given EXPRESSION is WF.
+  3. there is SET of WFFs called the SET of AXIOM.
+     Most often, one can effectively decide whether a given WFF is AXIOM;
+     in such case(exist effective procedure to check whether WFF is AXIOM)
+     L is is called AXIOMATIC THEORY(AXIOMATIC SYSTEM).
+  4. there is FINITE SET R1..Rn of RELATIONS among WFFs, called RULES of INFERENCE.
+     for each Ri there is UNIQUE POSITIVE INTEGER j such that, for every
+     SET of j WFFs and each WFF B, one can effectively decide
+     whether the given j WFFs  are in relation Ri to B, and if so,
+     B is said FOLLOW FROM or to be a DIRECT CONSEQUENCE of WFFS by virtue of Ri.
+
+- EXPRESSION - WORD - STRING |in smullyan| -  LINEAR SEQUENCE or just "ORDERED n-TUPLE"
+  Set of all WORD over ALPHABET is denoted by E* (here * is KLEENE STAR)
+
+  For any ALPHABET there is only one WORD of length 0, the - EMPTY WORD
+
+- WELL-FORMED FORMULA(- WFF)
+  a WORD(FINITE SEQUENCE of SYMBOLs from a given ALPHABET) that is part of a FORMAL LANGUAGE.
+  WFF is a SYNTACTIC FORMAL OBJECT that can be informally given
+  a SEMANTIC meaning.  WFF are syntactic ENTITIES, and as such must be specified
+  in a FROMAL LANGUAGE without regard to any INTERPTETATION of them.
+
+  in PROPOSITIONAL CALCULUS and PREDICATE CALCULUS 
+  we can determine whether  EXPRESSION is WFF(that is definition of WFF)
+  by 2(second) rule of FORMAL AXIOMATIC THEORY.
+
+
+- LENGTH of EXPRESSION  - the number of occurrences SYMBOLs in EXPRESSION.
+
+- TERM denotes a -MATHEMATICAL OBJECT[exmp. 1(symbol) x(variable), x+1]
+  FORMULA denotes a -MATHEMATICAL FACT [1 < 3(- STATEMENT) x < 3[- STATEMENT FORMULA]]
+      
+- FORMAL PROOF - DERIVATION - DEDUCTION
+- PROOF in L  -  SEQUENCE B1..Bn of WFFs such that, for each i, either Bi is
+  AXIOM of L or Bi is DIRECT CONSEQUENCE of some of the proceeding WFFs in the
+  SEQUENCE  by virtue of(due to) one of RULES of INFERENCE of L.
+
+- PROOF of B in L.  - PROVABLE STRING
+- THEOREM of L    -  WFF B of L such that B is the last WFF of some FORMAL PROOF in L.
+
+
+- THEOREMHOOD - SOLVABLE
+- DECIDABLE THEORY - FORMAL THEORY for which exist effective procedure for
+  checking any given WFF B to see whether exist PROOF of B (whether B is THEOREM)
+- UNDECIDABLE THEORY - quite the contrary.
+    DECIDABLE THEORY is one for which a machine can be devised to test WFFs for THEOREMHOOD,
+    whereas, for an UNDECIDABLE THEORY, ingenuity is required to determine whether WFFs are THEOREMS.
+
+- DECISION PROCEDURE  (HOFSTADTER)!!![p56]
+     ANY FORMAL SYSTEM which tells you how to make longer THEOREMS from shorter ones,
+     but never the reverse, has got to have a DECISION PROCEDURe for its THEOREMS.
+     (here about FORMAL SYSTEM with AXIOM SCHEME)
+     [Penrouse told also something similar about  FORMAL SYS
+       where we can add UNSOVABLE STATEMENT G1,G2.. to AXIOMS,
+       it similar to AXIOM SCHEME but am not enirelly sured   ]
+
+
+- LOGICAL CONSEQUENCE - SYNTACTIC CONSEQUENCE (most likely)
+- PROOF of C from F - DEDUCTION of C from F
+- HYPOTHESIS of PROOF - PREMISE of PROOF
+  A WFF C is said to be a CONSEQUENCE in L of a SET F of WFFs  <=>
+  there is a SEQUENCE B1..Bn of WFFs such that C is Bn and, for each i,
+  either Bi is an AXIOM, or Bi IN F, or Bi is a DIRECT CONSEQUENCE by some
+  RULE of INFERENCE of some of preceding WFFs in SEQUENCE.
+  Such SEQUENCE is called a PROOF(or DEDUCTION) of C from F.
+  The members of F are called the HYPOTHESES or PREMISE of PROOF.         [continuation] --|
+                                                                                           |
+======== 42                                                                                |
+- LOGICAL CONSEQUENCE - CONSEQUENCE   - |- C                                               |
+- C is a CONSEQUENCE of F  - is writing as  F |- C  or more exect F |-(L) C (L is THEORY)<-|
+  if F is FINITE SET {H1..Hn} we write H1..Hn |- C, instead of {H1..Hn} |- C
+  if F is EMPTY SET {} then {} |- C <=> C is THEOREM. (also |- C)
+
+  - PROVABLE   (x is provable mean x is theorem)
+  The following are simple properties of the notion of CONSEQUENCE:
+    ... F,D -  SEQUENCE of WFFs
+  1. (F TO D), (F |- C) => (D |- C) (here C is PROVABLE from F, and as result D)
+  2. (F |- C)  <=> D is FINITE SUBSET, D TO F, D |- C
+  3. (D |- C), (@B in D, F |- B) => F |- C
+
+(wiki)
+- DEDUCTIVE APPARATUS OF a FORMAL SYSTEM (FORMAL THEORY)
+- DEDUCTIVE SYSTEM  - PROOF SYSTEM
+   consists of the AXIOMS [or axiom schemata] and RULES of INFERENCE that can be
+   used to DERIVE the THEOREMS of the SYSTEM
+
+    - DEDUCTION
+    - DERIVATION - PROOF - FORMAL PROOF
+    all DEDUCTIVE SYSTEM the common property that a DEDUCTION is a finite syntactic object;
+    the format of this object, and the way it is constructed, vary widely. These
+    finite deductions themselves are often called DERIVATIONs(FORMAL PROOF) in PROOF THEORY.
+
+    - SOUND - COMPLETE
+    DEDUCTIVE SYSTEM is SOUND if any FORMULA that can be DERIVED in the system is LOGICALLY VALID.
+    Conversely, a DEDUCTIVE SYSTEM is COMPLETE if every LOGICALLY VALID FORMULA is DERIVABLE.
+
+  - EFFECTIVE DEDUCTION SYSTEM
+    DEDUCTIVE SYSTEM that have the property that it is possible to effectively verify that a
+    purportedly VALID DEDUCTION is actually a DEDUCTION.
+(wiki)
+- FORMAL GRAMMAR    - precise description of a FROMAL LAnGUAGE: a SET of STRINGS.
+    main categories:
+      a.- GENERATIVE GRAMMARS - which are SETS of RULES for how STRINGS
+        in a FORMAL LANGUAGE can be generated.
+        describes how to write only those STRINGS in the SET.
+      b.- ANALYTIC GRAMMARS (- REDUCTIVE GRAMMAR)  - SETS of RULES for how a STRING
+        can be analyzed to determine whether it is a MEMBER of the FORMAL LANGUAGE.
+        describes how to recognize when STRINGS are MEMBERS in the SET
+
+- AXIOM SCHEMAS - SCHEMA - ARGUMENT FORM
+    -  WFF in the LANGUAGE of an AXIOMATIC SYSTEM, in which one or more SCHEMATIC VARIABLES appear.
+    AXIOM SCHEMA stands for a COUNTABLY INFINITE SET of AXIOMS, that can usually be DEFINED RECURSIVELY.
+- SCHEMATIC VARIABLES   - VARIABLES, which are - METALINGUISTIC CONSTRUCTS,
+    stand for any TERM(that is VARIABLE or FUNCTION(PREDICATE)) or SUBFORMULA of the (FORMAL)SYSTEM,
+    which may or may not be required to satisfy certain conditions. 
+- FINITELY AXIOMATIZED  - FORMAL AXOMATIC THEORY that can be AXIOMATIZED without SCHEMATA
+
+-
+
+- RECURSIVE DEFINITION (- INDUCTIVE DEFINITION) - define an object in terms of itself
+- RECURSIVE DEFINITION of a FUNCTION  - defines VALUEs of the FUNCTIONs for some INPUTS
+    in terms of the VALUEs of the same FUNCTION for other INPUTS
+  RECURSIVELY DEFINED FUNCTIONS and SETS can often be PROVED by an INDUCTION PRINCIPLE
+    that follows the RECURSIVE DEFINITION
+  Most RECURSIVE DEFINITIONs have three foundations:
+    BASE CASE (BASIS), an INDUCTIVE CLAUSE, and an EXTREMAL CLAUSE
+- CIRCULAR DEFINITION and a RECURSIVE DEFINITION have one difference
+    RECURSIVE DEFINITION must always have BASE CASEs
+
+- VALIDITY - LOGICALLY VALID(obscheznachimiy) - SOUND (wiki)
+    . ARGUMENT is VALID <=> 
+          TRUTH of its PREMISES ENTAILS the TRUTH of its CONCLUSION and each step,
+          sub-argument, or logical OPERATION in the ARGUMENT is VALID.
+        ARGUMENT is SOUND if it is VALID and the PREMISEs are TRUE.
+    . FORMULA is VALID (- WELL-FORMED FORMULA -WFF) <=> it is TRUE under every INTERPRETATION of L,
+        (that is in PROPOSITIONAL CALCULUS  LOGICALLY VALID WFF is - TAUTOLOGY)
+    . ARGUNENT FORM(SCHEMA) is VALID <=> every ARGUMENT of that LOGICAL(STATEMENT) FORM is VALID.
+
+- PROOF CALCULUS
+    PROOF CALCULUS corresponds to a family of FORMAL SYSTEMs that use a common style
+    of FORMAL INFERENCE for its RULES of INFERENCE . The specific RULES of INFERENCE of a
+    member of such a family characterize the THEORY of a LOGIC.
+  Most used Examples:
+    - The class of Hilbert systems, of which the most famous example is the 1928
+      Hilbert-Ackermann system of FIRST-ORDER logic;
+    - Gerhard Gentzen's calculus of - NATURAL DEDUCTION, which is the first formalism of
+      STRUCTURAL PROOF THEORY, and which is the cornerstone of the formulae-as-types
+      correspondence relating logic to FUNCTIONAL PROGRAMMING;
+    - Gentzen's - SEQUENT CALCULUS, which is the most studied formalism of STRUCTURAL PROOF THEORY.
+
+- PRIMITIVE CONNECTIVES - STATEMENT LETTERS
+- MODUS PONENCE  - DETACHMENT RULE
+- FORMAL AXIOMATIC THEORY L for the - PROPOSITIONAL CALCULUS (PROPOSITIONAL LOGIC)
+  1. The symbols of L are "! -> ( )", and the letters Ai with positive INTEGERS i
+    as subscripts: A1, A2, A3, .... The symbols ! and -> are called PRIMITIVE CONNECTIVES,
+    and the letters Ai are called STATEMENT LETTERS.
+  2. 
+    a. All STATEMENT LETTERS are WFFs.
+    b. B,C are WFFs  =>  so are !B, (B=>C) ..
+      thus WFF of L is just a STATEMENT FORM built up from the STATEMENT
+      LETTERS Ai by means of CONNECTIVES ! and ->
+    c. expression is WFF <=> it can be shown to be a WFF on the basis of clauses (a) and (b)
+  3.  B,C,D are WFFS of L(FORMAL LANG)  => the following are AXIOMS(AXIOMS SCHEMAS):
+
+    (A1). B -> (C -> B).
+                      (B is true => B truth follows from anything)
+                      (B is TRUE => none reasoning cant imply that B is FALSE, B is always true)
+    (A2). [B -> (C -> D)] -> [(B -> C) -> (B -> D)]
+                      (svoego roda transitivonost implikacii)
+    (A3). [(!C) -> (!B)] -> [((!C) -> B) -> C]
+                      (axiom of - PROOF by CONTRADICTION or NONCONTRADICTORY)
+                      (aka (A->B)->(!B -> !A) ) (Hilbert write 4 axiom in such way)
+  4. the only RULE of INFERENCE of L is MODUS PONENCE (MP)
+      A, A->B |- B
+
+  One can easily check for any given WFF whether or not it is an axiom  => L is AXIOMATIC
+
+  In setting up the SYSTEM L , it is our intention to obtain as THEOREMs
+    precisely the class of all TAUTOLOGIES
+
+  We introduce other CONNECTIVES by definition:
+    (D1). (B,C)     for !(B -> !C)
+    (D2). (B;C)     for (!B) -> C
+    (D3). (B <-> C) for (B->C), (C->B)
+
+- REDUCIBLE EXPRESSION
+- REDEX   - something to be REDUCED according to the RULEs of a FORMAL SYSTEM.
+
+======= 43
+- NON FORMAL PROOF - NON-FORMAL PROOF
+- OBJECT LANGUAGE - METALANGUAGE
+  There is FORMAL PROOF and NON-FORMAL PROOF ( SEQUENCEs of English SENTENCEs )
+  here FORMAL LANG(what we are studying) is an OBJECT LANGUAGE, while the
+  LANGUAGE in which we are formulate and prove STATEMENTS about the OBJECT LANG
+  is called METALANGUAGE.
+  Some METAMENGUAGE serve to describe OBJECT LANG, for example its GRAMMAR
+
+  METALANGUAGE also can be FORMALIZED and be an OBJECT LANG (subject of study)
+  which we would carry out in a - METAMETALANGUAGE, and so on
+
+- METAPROOF   - PROOF in METALANGUAGE
+- METATHEOREM - THEOREM in METALANGUAGE
+  To avoid confusion, we generally use '.PROPOSITION (N.N)' instead of 'metatheorem'
+
+- OBJECT LANGUAGES
+- METAMATHEMATICs refers to the study of LOGICAL and MATHEMATICAL OBJECT LENGUAGES
+
+  L is FORMAL THEORY for PROPOSITIONAL CALCULUS(PROPOSITIONAL LOGIC)
+  .LEMMA 1.8
+    B is WFFs
+    |-(L) B->B for all B
+             (PROOF identical to what the boy from youtube(Okulovsky) has shown )
+  -- Proof and solution 1.47.a (!b->b)->b
+  | b=!x c=!x->!x d=!x
+  | a2- [!x->((!x->!x)->!x)] -> ((!x->(!x->!x))->(!x->!x))
+  | a1-  !x->((!x->!x)->!x)
+  | MP- [(!x->(!x->!x))->(!x->!x)]
+  | a1- b=!x c=!x d=!x
+  |     !x->(!x->!x)
+  | MP- !x->!x
+  |
+  | a3- b=x c=x
+  |     [!x->!x]->[(!x->x)->x]
+  | MP- (!x->x)->x
+
+  In most PROOFs, we actually begin with the desired result X->X. and
+  then look for an appropriate AXIOM that may lead by MP to that result.
+  A mixture of ingenuity and experimentation leads to a suitable instance of AXIOM (A2)
+======= 44
+
+  .PROPOSITION 1.9 [- DEDUCTION THEOREM] (metatheorem)
+    F is SET of WFFs, B is WFF, C is WFF
+    [F, B |- C] => [F |- (B -> C)]
+    in particular  [B |- C] => [|- (B -> C)]
+  [mathhelpplanet corollary]
+    [F,B |- C <=>  F |- B->C]
+    [F,B |- C <=>  |- F1 -> (F2 -> .. (Fn -> (B -> C)))]
+
+
+
+(wiki)
+- DEDUCTIVE REASONING - DEDUCTIVE LOGIC - LOGICAL DEDUCTION - TOP-DOWN LOGIC
+    is the process of reasoning from one or more STATEMENTs (PREMISEs) to reach
+    a logically certain CONCLUSION.
+    (see also - LOGICAL PROOF - DEDUCTIVE SYSTEM)
+
+    DEDUCTIVE REASONING (TOP-DOWN LOGIC) contrasts with INDUCTIVE REASONING (BOTTOM-UP LOGIC)
+    in the following way: In DEDUCTIVE REASONING, a CONCLUSION is reached REDUCTIVELY
+    by applying GENERAL RULEs that hold over the entirety of a CLOSED DOMAIN of DISCOURSE(- CWA),
+    narrowing the range under consideration until only the CONCLUSION is left. In INDUCTIVE REASONING,
+    the CONCLUSION is reached by generalizing or extrapolating from initial information. As a result,
+    induction can be used even in an OPEN DOMAIN, one where there is EPISTEMIC UNCERTAINTY.
+
+- EPISTEMIC UNCERTAINTY - SYSTEMATIC UNCERTAINTY
+    which is due to things we could in principle know but don't in practice
+
+- CLOSED-WORLD ASSUMPTION (- CWA)  - OPEN-WORLD ASSUMPTION (- OWA)
+    CLOSED-WORLD ASSUMPTION (CWA), in a FORMAL SYSTEM of LOGIC used for knowledge representation,
+    is the presumption that a STATEMENT that is TRUE is also known to be TRUE.
+    Therefore, conversely, what is not currently known to be true, is FALSE.
+
+    The opposite of the CWA is the OPEN-WORLD ASSUMPTION (OWA), stating that
+    lack of knowledge does not imply FALSITY and assumption that the TRUTH VALUE of a STATEMENT
+    may be TRUE irrespective of whether or not it is known to be TRUE.
+    (but it is FALSE if also known to be FALSE)
+(/wiki)
+
+
+======= 45
+
+  .COROLLARY 1.10
+    a  [ B->C, C->D   ] |-  [ B->D ]
+    b  [ B->(C->D), C ] |-  [ B->D ]
+
+  .LEMMA 1.11
+  [@B,C , B is WFF, C is WFF](following WFFs are THEOREMS of L).
+
+    (a)  !!B -> B
+    (b)  B -> !BB
+    (c)  !B -> (B -> C)
+    (d)  (!C -> !B) -> (B -> C)
+    (e)  (B -> C) -> (!C -> !B)
+    (f)  B -> [!C -> !(B -> C)]
+    (g)  (B -> C) -> [(!B -> C) -> C]
+
+======= 47
+
+  .PROPOSITION 1.12 [imho - SOUNDNESS] (metatheorem)
+    @T, T is THEOREM of L => T is TAUTOLOGY 
+  PROOF
+    all AXIOMS is TAUTOLOGY, MP leads to TAUTOLOGY from TAUTOLOGY
+    (by proposition1.2)  => all THEOREMs is TAUTOLOGY
+
+======== 48
+!!.LEMMA 1.13 is to be used in the PROOF that every TAUTOLOGY is a THEOREM of L.
+  .LEMMA 1.13
+    B is WFF, B1..Bn is STATEMENT LETTERs occured in B
+    for a given ASSIGNMENT of TRUTH VALUES of B1..Bn, 
+      Let  Bj takes VALUE T                  => B'j is Bj 
+           Bj takes VALUE F                  => B'j is !Bj
+           B  takes VALUE T under ASSIGNMENT => B' is B
+           B  takes VALUE F under ASSIGNMENT => B' is !B
+      Then B'1..B'n |- B'
+    Example
+      B is !(!A2 -> A5)  => for each row of TRUTH TABLE
+
+        A2  A5  !(!A2 -> A5)
+        ____________________
+        T   T   F
+        F   T   F
+        T   F   F
+        F   F   T
+
+    LEMMA 1.13 asserts a CORRESPONDING deducibility RELATION. For instance ..
+    .. corresponding to 3rd row there is
+        [ A2, !A5 ]   |-  ![ !(!A2 -> A5) ]
+    .. corresponding to 4rd row there is
+        [ !A2, !A5 ]  |-  !(!A2 -> A5)
+    (that is, it can be PROOVED, as Okulovsky said when talked about fabula and scenario)
+
+======= 49
+(wiki)
+- COMPLETENESS THEOREM - SOUNDNESS
+    The COMPLETENESS THEOREM says that if a FORMULA is LOGICALLY VALID(i.e. TAUTLOGY in PREDIC.CALCUL.)
+      then there is a FINITE DEDUCTION (a FORMAL PROOF) of the FORMULA(i.e. FORMULA is THEOREM).
+
+    Godel's COMPLERENESS THEOREM says that a DEDUCTIVE SYSTEM of FIRST-ORDER
+    PREDICATE CALCULUS is "COMPLETE" in the sense that no additional INFERENCE RULEs
+    are required to PROVE all the LOGICALLY VALID FORMULAs. A converse to
+    COMPLERENESS is SOUNDNESS, the fact that only LOGICALLY VALID FORMULAs(THEOREMS) are
+    provable in the DEDUCTIVE SYSTEM.(IMHO| this follows from .proposition 1.2)
+    Together with SOUNDNESS (whose verification is easy), this THEOREM implies that a
+    FORMULA is LOGICALLY VALID <=> it is the CONCLUSION of a FORMAL DEDUCTION(PROOF).
+      (i.e. TAUTOLOGY <=> THEOREM)
+(/wiki)
+  .PROPOSITION 1.14 [ - COMPLETENESS THEOREM ] (metatheorem)
+    B is WFF of L, B is TAUTOLOGY  =>  B is THEOREM of L
+
+- CONSISTENT
+  .COROLLARY 1.16
+    L(FORMAL AXIOMATIC THEORY of the PROPOSITIONAL CALCULUS) is CONSISTENT
+    that is, there is NO WFF B such that both B, and !B are THEOREM.
+
+======= 50
+================= INDEPENDENCE. MANY-VALUED LOGIC =============================
+- INDEPENDENCE
+    SUBSET Y of the SET of AXIOMs of a THEORY is said to be INDEPENDENT if some
+    WFF in Y cannot be proved by means of the RULEs of INFERENCE from the SET of
+    those AXIOMs not in Y.
+
+
+.PROPOSITION 1.17 [- INDEPENDENT] (metatheorem)
+  Each of the AXIOMS (a1)-(a3)[of PROPOSITIONAL CALC]
+    is INDEPENDENT.
+  (definitions faced in proof)
+    - SELECT - SELECTNESS - GROTESQUE - SUPER
+    - MANY-VALUED LOGIC
+
+(wiki)
+- HYPOTHESIS  - is a step where one adds an additional PREMISE to those already
+                available. So, if your previous step S was deduced as:
+        B1,B2..Bn |- S
+    then one adds another premise H and gets:
+        B1..Bn, H |- H
+    This is symbolized by moving from the n-th level of INDENTATION to the n+1-th
+          ..... S previous step                                  level and saying
+              . H hypothesis
+
+- REITERATION   - is a step where one re-uses a previous step. In practice,
+    this is only necessary when one wants to take a HYPOTHESIS which is not the
+    most recent HYPOTHESIS and use it as the final step before a DEDUCTION step.
+
+- DEDUCTION   -  is a step where one removes the most recent HYPOTHESIS (still available)
+  and prefixes it to the previous step. This is shown by unindenting one level as follows
+      ..... H (hypotesis)
+          . (.. other steps)
+          . C (conclusion drawn from H)
+          . H->C (deduction)
+  [how I understood it]
+    B1..Bn, H |- H  (maybe B1..Bn |- H->H  since earlier prooved that X->X is tautology)
+    B1..Bn, H |- C
+    B1..Bn |- H->C
+
+(/wiki)
+
++++++++++++++++++++++++++ QUANTIFICATION THEORY +++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+======================== QUANTIFIERS ==========================================
+======= 57
+
+- UNIVERSAL QUANTIFIER - EXISTENTIAL QUANTIFIER
+    If P(x) asserts that x has the PROPERTY P, then (@x)P(x) means
+    that PROPERTY P holds for all x or, in other words, that everything has the
+    PROPERTY P. On the other hand, ($x)P(x) means that some x has the PROPERTY
+    P - that is, that there is at least one object having the PROPERTY P. In
+    (@x)P(x), '(@x)' is called a UNIVERSAL QUANTIFIER; in ($x)P(x), '($x)' is called
+    an EXISTENTIAL QUANTIFIER.
+
+    [exmp.] "about friends"
+    [@x](F(x,m)->F(x,j)) , !F(p,j)  |-  !F(p,m)
+
+    Notice that the VALIDITY of this INFERENCE does not depend upon the
+    particular meanings of F,m,j,p,x.
+
+======== 58
+
+    just as - STATEMENT FORMs were used to indicate logical structure dependent
+    upon the LOGICAL CONNECTIVEs, so also the FORM of INFERENCEs involving
+    QUANTIFIERs, such as "about friends", can be represented abstractly.
+    For this purpose, we shall use commas, parentheses, the symbols "! -> "
+    of the PROPOSITIONAL CALCULUS, the UNIVERSAL QUANTIFIER symbol @, and
+    the following groups of symbols:
+    - INDIVIDUAL VARIABLEs: x1..xn...
+    - INDIVIDUAL CONSTANTs: a1..an...      - CONSTANTs
+    - PREDICATE LETTERs: A_nk (n and k are any positive integers)
+    - FUNCTION LETTERs: f_nk (n and k are any positive integers)
+      * n - superscript k - subscript
+      * n -  indicates the number of ARGUMENTs
+      * k -  indexing number to distinguish different PREDICATE or FUNCTION LETTER
+      *       with the same number of argument.
+  in "about friends" exmp.
+    x      plays the role of INDIVIDUAL VARIABLE;
+    m,j,p  plays the role INDIVIDUAL CONSTANTS
+    F      is - BINARY PREDICATE LETTER (PREDICATE LETTER WITH TWO ARGUMENTs)
+              if one argument => - MONAIDIC PREDICATE LETTER.
+    FUNCTION LETTER is in 3 exmp., his value "successor of an even integer"
+
+======= 59
+- TERM(correspond nouns and noun phr.["two plus x"] in ordinary lang)
+  The FUNCTION LETTERs applied to the VARIABLEs and INDIVIDUAL CONSTANTs generate the TERMs:
+    1. VARIABLEs and INDIVIDUAL CONSTANTs are TERMs.
+    2. f_nk is a FUNCTION LETTER, t1..tn are TERMs => f_nk(t1..tn) is a TERM.
+    3. An EXPRESSION is a TERM <=> it can be shown to be a TERM on the basis of condit. 1,2.
+
+- ATOMIC FORMULAs
+    The PREDICATE LETTERs APPLIED to TERMs yield the ATOMIC FORMULAs; that is...
+    A_nk is a PREDICATE LETTER, t1..tn are TERMs => A_nk(t1..tn) is an ATOMIC FORMULA.
+
+- WELL-FORMED FORMULAs(- WFFs) of QUANTIFICATION THEORY are defined as follows:
+    1. Every ATOMIC FORMULA is a WFF.
+    2. B and C are WFFs, y is a VARIABLE => (!B), (B->C),([@y]B) are wfs.
+    3. An EXPRESSION is a WFF <=> it can be shown to be a WFF on the basis of cond. 1,2.
+
+  smullyan: WFF without VARIABLEs(afaik 0-ARITY) is called - SENTENCE
+
+- SCOPE
+    ([@y]B), 'B' is called the SCOPE of the QUANTIFIER '[@y]'
+
+     Notice that B need not contain the variable y. In that case,
+     we understand ([@y]B) to mean the same thing as B
+
+  EXPRESSIONs "B,C   B;C   B<->C"  are defined as in PROPOSITION CALCULUS
+  EXISTENTIAL QUANTIFICATION is defined as follows:
+      [$x]B   ==   !([@x] !B)
+    [ we could take $ as primitive and then define @]
+
+======= 60
+- BOUND OCCURRENCE - FREE OCCURRENCE
+    AN OCCURRENCE of a VARIABLE x is said to be BOUND in a WFF B if either
+    it is the OCCURRENCE of x in a QUANTIFIER '(@x)' in B or
+    it lies within the SCOPE OF a QUANTIFIER '(@x)' in B.
+    Otherwise, the occurrence is said to be FREE in B.
+
+    (1) A_21(x1,x2) - OCCURRENCE of x1 is FREE
+    (2) A_21(x1,x2) -> [@x1]A_11(x1) - first OCCURRENCE is FREE, other are BOUND
+    (3) [$x1]A_21(x1,x2)  - OCCURREN. of x1 is BOUND, because $ defined by means of @
+        OCCURRENCE OF x2 is FREE everywhere ....(see more detail if want)
+
+- BOUND VARIABLE - FREE VARIABLE
+    VARIABLE is SAID TO BE FREE(BOUND) in a WFF B if it has a FREE(BOUND) OCCURRENCE in B.
+    => a VARIABLE may be both FREE and BOUND in the same WFF 
+      [exmp.] x1 is FREE and BOUND in (2)
+
+(wiki)
+- APPARENT VARIABLE - REAL VARIABLE - PLACEHOLDER
+- FREE VARIABLE     - a NOTATION that specifies places in an EXPRESSION
+                      where substitution may take place.
+    The idea is related to a PLACEHOLDER ... 
+    (a SYMBOL that will later be replaced by some literal string)
+- BOUND VARIABLE    - a VARIABLE that was previously FREE, but
+  has been BOUND to a specific VALUE or SET of VALUES
+    [exmp]
+            in [@x$y]P(x,y,z)   ...
+     LOGICAL VALUE of this EXPRESSION depends on the VALUE of z, but there is
+     nothing called x or y on which it could depend.
+
+  - BINDING OPERATOR(@,$ in PREDICATE LOGIC FORMAL SYSTEM)
+  - LOCATION
+
+  VARIABLE-BINDING(- BINDING) mechanisms are purely SYNTACTIC properties of EXPRESSIONs and VARIABLEs in them
+  A BINDING OPERATOR Q takes two arguments: a VARIABLE v and an EXPRESSION P,
+  and when applied to its ARGUMENTs produces a new EXPRESSION Q(v, P). The
+  meaning of BINDING OPERATORs is supplied by the SEMANTICs of the LANGUAGE
+  
+  VARIABLE BINDING relates three things: a VARIABLE v, a location 'a' for that
+  variable in an EXPRESSION and a non-leaf node n of the form Q(v, P). Note: we
+  define a LOCATION in an EXPRESSION as a leaf node in the SYNTAX TREE.
+  VARIABLE BINDING occurs when that LOCATION is below the node n.
+           [@x]P(x)                         n($,@)
+                                            /    \
+                                          v {x}   'a'{P(x)}
+(/wiki)
+======== 61
+  xi1..xik will be indicated as FREE in WFF B by writing B(xi1..xik)
+  This does not mean that B contains these VARIABLEs as FREE VARIABLEs,
+  nor does it mean that B does not contain other FREE VARIABLEs.
+  This notation is convenient because we can then agree to write as B(t1..tk)
+  the result of substituting in B the TERMs t1..tk for
+  all FREE OCCURRENCEs (if any) of xi1..xik, respectively
+
+- FREE FOR xi in B      B is WFF | t is TERM | xj is VARIABLE in t
+  t is said to be FREE FOR xi in B. 
+  =>
+     NO FREE OCCURRENCE of xi in B lies within the SCOPE of any QUANTIFIER (@xj)
+  it means that...
+    t is substituted for all FREE OCCURRENCEs (if any) of xi in B(xi) =>
+    => NO OCCURRENCE of a VARIABLE in t becomes a BOUND OCCURRENCE in B(t)
+[from me]!!!
+    if variable xj of t is bounded => then xi must be bounded too 
+
+  TERM x2 is FREE FOR x1 in A_11(x1), but x2 is NOT FREE FOR x1 in [@x2]A_11(x1)
+  TERM f_21(x1,x3) is FREE FOR x1 in [@x2]A_21(x1,x2) -> A_11(x1), but
+    is NOT FREE FOR x1 in [$x3,@x2]A_21(x1,x2) -> A_11(x1).
+
+  The following facts are obvious.
+  1. A TERM that contains no VARIABLEs is FREE FOR any VARIABLE in any WFF.
+  2. A TERM t is FREE FOR any VARIABLE in B if none of the VARIABLEs of t is BOUND in B.
+  3. xi is FREE FOR xi in any WFF.
+  4. Any TERM is FREE FOR xi in B if B contains no FREE OCCURRENCEs of xi.
+
+======= 62
+  (1) "All As are Bs" -- [@x](A(x)->B(x))
+  (2) "Some As are Bs" -- [$x](A(x),B(x))
+  (3) "No As are Bs"  -- [@x](A(x)->!B(x)) or ![$x](A(x),B(x))
+  (4) "Some people respect everyone" -- [$x](P(x), [@y](P(y) -> R[x,y]))
+
+  here recommended use next symbol for readability
+    - INDIVIDUAL VARIABLEs: z,y,x,v,u...
+    - INDIVIDUAL CONSTANTs: a,b,c...       
+    - PREDICATE LETTERs: A,B,C....
+    - FUNCTION LETTERs: f,g,h....
+
+  'No politics are honest'
+    [@x](P(x)->!H(x)) or ![$x](P(x),H(x))
+  'John hate all people who dont hate themselves'
+    [@x](!H(x,x) -> H(j,x)) or [@x](P(x),!H(x,x) -> H(j,x)).
+
+============= 2.2. FIRST-ORDER LANG and THEIR INTERPRETATIONS. =================
+                SATISFABILITY and TRUTH.  MODELS
+======== 64
+
+- FORMAL LANGUAGE
+- FIRST-ORDER LANGUAGE L contains the following SYMBOLs.
+  (a) PROPOSITIONAL CONNECTIVES ! -> and the UNIVERSAL QUANTIFIER SYMBOL @
+  (b) ( ) ,  [they are not necessarily, and can be avoided by redefinition
+                                                  notions of TERM and WFF]
+  (c) DENUMERABLY many INDIVIDUAL VARIABLES x1..xn
+  (d) a FINITE or DENUMERABLE, possibly EMPTY, SET of FUNCTIONAL LETTERs.
+  (e) a FINITE or DENUMERABLE, possibly EMPTY, SET of INDIVIDUAL CONSTANTs.
+                    (may be considered as 0-ARITY FUNCTIONAL SYMBOL)
+  (f) a NON-EMPTY SET of PREDICATE LETTERs.
+
+- TERM of L - WFF of L.
+  by a TERM of L we mean a TERM whose SYMBOLs are SYMBOLs of L.
+  by a WFF of L we mean a WFF whose SYMBOLs are SYMBOLs of L.
+
+(by smullyan)
+- EFS is ELEMENTARY FORMAL SYSTEM
+- REPRESENTABILITY 
+  let P be PREDICATE, E is EFS over ALPHABET K, W is SUBSET of WORDS in K.
+  P is REPRESENTS W   <=>   @X in K:
+                                    XinW <=> PX is PROVABLE in E.
+  [from me](that is W is all WFF what can satisfy P)
+
+  Thus, in a LANGUAGE L some or all of the FUNCTION letters and INDIVIDUAL CONSTANTs
+  may be absent, and some (but not all) of the PREDICATE letters may be absent.
+  If there were no PREDICATE LETTERs, there would be no WFFs.
+
+- NON-LOGICAL CONSTANTs of L   - CONSTANTs
+    The INDIVIDUAL CONSTANTs, FUNCTION LETTERs and PREDICATE LETTERs of
+    a LANGUAGE L are called the NON-LOGICAL CONSTANTs of L
+
+- DOMAIN of INTERPRETATION
+- INTERPRETATION M of L(FIRST-ORDER LANG) consists of the following ingredients.
+    (a) a NON-EMPTY SET D, called the DOMAIN of INTERPRETATION.
+    (b) for each PREDICATE LETTER A_nj of L, an assignment of n-place RELATION
+      (A_nj)_M in D.
+    (c) for each FUNCTION LETTER f_nj of L, an assignment of n-place OPERATION
+      (f_nj)_M in D.  ( that is FUNCTION from D_n into D )
+    (d) for each INDIVIDUAL CONSTANTs  ai of L, an assignment of some fixed
+      element (ai)_M of D.
+  Given such an INTERPRETATION, VARIABLEs are thought of as ranging over the
+  set D, and ! -> and QUANTIFIERs are given their usual meaning. 
+
+- CLOSED WFF - SENTENCE
+    For a given INTERPRETATION of a LANGUAGE L, a WFF of L without FREE VARIABLEs
+    (called a CLOSED WFF or a SENTENCE) represents a PROPOSITION that is TRUE or FALSE,
+    whereas a WFF with FREE VARIABLEs may be SATISFIED (i.e. TRUE) for some VALUEs
+    in the DOMAIN and NOT SATISFIED (i.e. false) for the others.
+
+    [exmp]
+    (1) A_21(x1,x2)    (2) [@x2](A_21(x1,x2))     (3) [$x1,@x2](A_21(x1,x2))
+    let as take:
+        D(domain) - NATURALs  and INTERPRET A_21(y,z) as y <= z
+    then:
+        (1) 'x1 <= x2'  SATISFIES all <a,b> such that a<=b.
+        (2) 'for all NATURALs x2, x1<=x2' SATISFIEs only 1.
+        (3) is a TRUE SENTENCE asserting that there is a smallest NATURAL.
+      If we were to take as DOMAIN the SET of all integers, then WFF(3) would be FALSE.
+
+======== 66
+  notion of TRUTH will be defined on the basis of SATISFABILITY.
+
+- SATISFIABILITY (rigorous definition by the TARSKI1936)
+  instead of talking about the n-TUPLEs of OBJECTs that SATISFY a WFF(- PREDICATE) that
+  has n FREE VARIABLEs, it is much more convenient from a technical standpoint to deal
+  uniformly with DENUMERABLE SEQUENCEs.
+  that is...                                                - SATISFIES
+    n-TUPLE <sj1..sjn> SATISFIES B in the usual sense =>   
+      => DENUMERABLE SEQUENCE s=(s1,s2..) is to be thought of as SATISFYING a WFF B
+         that has xj1..xjn as FREE VARIABLEs (where j1<j2..<jn)
+  [exmp]
+    DENUMERABLE SEQUENCE (s1,s2...) of OBJECTs in the DOMAIN of an INTERPRETATION M
+    will turn out to SATISFY the WFF A_21(x2,x5 )    <=>
+                                      the ORDERED PAIR, <s2,s5> IN (A_21)_M(it is RELATION)
+                                      assigned to the PREDICATE LETTER A_21 by the INTERPRETATION M.
+  
+  - SIGNATURE (wiki and me) [- TYPE in universal algebra] [- VOCABULARY in model theory]
+                          identified with the FIRST-ORDER LANGUAGE L to which it provides
+                          the NON-LOGICAL SYMBOLS. However, the CARDINALITY of the LANGUAGE L
+                          will always be infinite; if SIGNATURE is FINITE => |L| is aleph(NO)
+      = SET of {f,A,ar}
+         f-SET of - FUNTION SYMBOLs(and CONSTANTs [that is for exmp ...   + * 1 0 ])
+                                                (they used as TERMs)
+         A-SET of - PREDICATE SYMBOLs - RELATION SYMBOLs
+         ar -  function f&A :-> NATs (assigns a NON-NEGATIVE INTEGER called - ARITY - DEGREE
+                                       to every FUNCTION or RELATION SYMBOL.)
+         0-ar SYMBOL(arity=0) is called - CONSTANT SYMBOL
+
+       A SIGNATURE with no FUNCTION SYMBOLS is called a - RELATIONAL SIGNATURE,
+       and a SIGNATURE with no RELATION SYMBOLS is called an - ALGEBRAIC SIGNATURE.
+       A - FINITE SIGNATURE is a SIGNATURE such that f and A are FINITE.
+       More generally, the CARDINALITY of a SIGNATURE σ = (f,A,ar) is defined as |σ| = |f| + |A|
+
+       - LANGUAGE of a SIGNATURE is the SET of all WELL-FORMED SENTENCES built from the SYMBOLS
+         in that SIGNATURE together with the SYMBOLS in the LOGICAL SYSTEM.
+
+[from me] s* - is most likely - INTERPRETATION FUNCTION
+  M - INTERPRETATION of L, D - DOMAIN of M.
+- E - SET of ALL DENUMERABLE SEQUENCES of ELEMENTs of D.  - SIGNATURE [in my opinion]
+  for WFF B in L we shall def what it means for a SEQUENCE s=(s1,s2...) in E to SATISFY B in M.
+  as preliminary step, for a given s in E, we shall def FUNCTION s*, what
+  assigns to each TERM t of L an ELEMENT s*(t) in D.
+    (1) t is a VARIABLE xj => s*(t) be sj.
+    (2) t is INDIVIDUAL CONSTANT aj => s*(t) is INTERPRETATION (aj)_M of this CONSTANT
+    (3) f_nk is a FUNCTION LETTER, (f_nk)_M is corresponding OPERATION in D, t1..tn are TERM =>
+        =>  s*(f_nk(t1..tn)) = (f_nk)_M(s*(t1)..s*(tn))
+
+  intuitively, s*(t) is the ELEMENT of D obtained by substituting, for each j, a name of sj
+  for all occurrences of x1 in t and then performing the operations of the INTERPRETATION
+  corresponding to the FUNCTION LETTERs of t.
+  [exmp]
+    [ t is f_22(x3,f_21(x1,a1)),
+      INTERPRETATION has SET of INTEGERS as its DOMAIN, 
+      f_22 and f_21 are INTERPRETED as ordinary multiplication and addition,
+        respectively, a1 is INTERPRETED as 2
+    ] =>
+        for any SEQUENCE s=(s1,s2..) of INTEGERS, s*(t) is the INTEGER s3*(s1+2)
+
+  (.. to be continued)
+======== 67
+
+- SATISFIABILITY (..continuation) M -  INTERPRETATION
+- SATISFACTION  - SATISFIES
+  (1) B is an ATOMIC WFF A_nk(t1..tn),
+      A_nk_M is corresponding n-place RELATION of the INTERPRETATION   => 
+      =>    [ s=(s1,s2..) SATISFIES B <=> A_nk_M(s*(t1)..s*(tn)) ] [exmp](1)(2)
+      that is ...
+          n-TUPLE <s*(t1)..s*t(n)> IN RELATION (A_nk_M)
+  (2) s satisfies !B  <=>  s does not SATISFY B.
+  (3) s satisfies B->C  <=>  s does not SATISFY B or s SATISFIES C.
+  (4) s satisfies (@xi)B  <=>  every SEQUENCE that differs from s
+                               in at most the i-th component satisfies B. [exmp](3)
+  that is ....
+    s=(s1,s2..) SATISFIES a WFF B  <=>
+      for each i, we replace all FREE OCCURRENCEs of xi (if any) in B by a symbol
+      representing si, the resulting proposition is TRUE under the given INTERPRETATION.
+  [exmp]
+    (1) D is REAL NUMs,   A_21 is <=,   f_11 is e^x  =>
+          SEQUENCE s=(s1,s2..) of REAL NUMs  SATISFIES A_21(f_11(x2), x5)   <=> .... 
+                    ....  e^s2 <= s5
+    (2) D is INTEGERs,    A_41(x,y,u,v) is x*v=u*y,   a1 is 3   =>
+          s=(s1,s2..) of INTEGERs SATISFIES A_41(x3,a1,x1,x3)  <=>  .....
+                  .... (s3)^2 = 3*s1
+    (3) s=(s1,s2..) SATISFIES [@xi]B  <=> for every c of the DOMAIN,
+                                          s=(s1,s2..c,..) SATISFIES B.
+        (s1,s2..c,..) denotes SEQUENCE obtained from (s1,s2..si,..) by
+        replacing the i-th component si by c.
+        also ..
+          s SATISFIES [@xi]B => as a special case, s SATISFIES B.
+
+                                E - SET of ALL DENUMERABLE SEQUENCES of ELEMENTs of D.
+- MODEL
+- TRUTH of WFFs - FALSITY of WFFs
+- |=(M) B
+  notion of TRUTH and FALSITY of WFFs for a given INTERPRETATION M.
+  (1) WFF B is TRUE for M [|=(M) B]  <=> every SEQUENCE in E SATISFIES B.
+  (2) B is FALSE for M    <=>  no SEQUENCE if E SATISFIES B.
+  (3) M is MODEL for SET F of WFFs  <=> every WFF in F is TRUE for M.
+
+======== 68
+- PROPERTIEs of (- TRUTH - FALSITY - SATISFIABILITY)
+(1)
+  (a) B is FALSE for M <=> !B is TRUE for M.
+  (b) B is TRUE for M <=> !B is FALSE for M.
+(2)
+  It is not the case that  -  |=(M) B, |=(M) !B
+(3)
+  |=(M)B, |=(M)B->C => |=(M)B (written in book, its wrong, in russion vers. as below)
+  |=(M)B, |=(M)B->C => |=(M)C (it is rigth on my opinion)
+(4)
+  B->C is FALSE for M  <=> |=(M)B, |=(M)!C
+(5)
+  [remember that B,C B;C B<->C [$xi]B  is abreviation for !(B->C) .. ![@xi]!B]
+
+  Consider an interpretation M with DOMAIN D.  SEQUENCE s
+  (a) s SATISFIES B,C   <=> s SATISFIES B and s SATISFIES C
+  (b) s SATISFIES B;C   <=> s SATISFIES B or  s SATISFIES C
+  (c) s SATISFIES B<->C <=> s SATISFIES B and  s SATISFIES C, xor
+                            s SATISFIES neither B nor C
+  (d) s satisfies ($xi)B <=>  there is a sequence s' that differs from s
+        in at most the i-th component such that s' satisfies B.
+        ( In other words s=(s1,s2..si..) satisfies ($xi)B <=> 
+          there is an element c in the domain D such that the sequence
+          (s1,s2..c..) satisfies B. )
+(6)                                          - CLOSURE - UNIVERSAL CLOSURE
+  |=(M)B  <=> |=(M)[@xi]B     that is ...  
+  By the CLOSURE of B we mean the CLOSED WFF obtained from B by prefixing in UNIVERSAL
+  QUANTIFIERs those variables, in order of descending subscripts, that are FREE in B.
+  B has no FREE VARIABLES => the CLOSURE of B is defined to be B itself.
+  [exmp.]
+    B is A_21(x2,x5) -> ![$x2](A_31[x1,x2,x3]). its CLOSURE is [@x5,x3,x2,x1](B)
+    B is TRUE  <=>  its CLOSURE is TRUE.
+(7)  
+  Every INSTANCE of a TAUTOLOGY is TRUE for any INTERPRETATION.
+  - INSTANCE
+  An INSTANCE of a STATEMENT FORM is a WFF obtained from the STATEMENT FORM
+  by - SUBSTITUTING WFFs for all STATEMENT LETTERs, with all OCCURRENCEs of
+  the same STATEMENT LETTER being replaced by the same WFF.
+    instance of A1->!A2;A1  is  A_11(x2) -> (![@x1]A_11[x1]) ; A_11(x2)
+
+  [for prooving]:      show that all instances of the axioms of the
+                       system L are true and then use (3) and Proposition 1.14.
+(8)[
+   FREE VARIABLEs (if any) of a WFF B occur in the list xi1..xik,
+   the SEQUENCEs s and s' have the same components in the i1-th..ik-th places 
+   ]
+     => ( s satisfies B  <=>  s' satisfies B)
+
+  - RELATION of the INTERPRETATION defined by B (...$$$)
+  - PROPERTY of the INTERPRETATION defined by B
+      xi1..xik -  k distinct VARIABLEs in order of incrising subscripts.
+      B(xi1..xik) -  WFF that has xi1..xik as its only FREE VARIABLEs.
+  =>
+    SET of k-TUPLEs <b1..bk> of ELEMENTs of the DOMAIN D, such that
+    any SEQUENCE with b1..bk in its i1-th..ik-th places, respectively,
+    SATISFIES B(xi1..xik) is called ...$$$
+    ....
+    every k-tuple (b1..bk) in this RELATION SATISFIEs B(xi1..xik) in the INTERPRETATION M
+    this will be writen ..
+        |=(M)B[b1..bk]
+      This extended notion of - SATISFACTION corresponds to the original intuitive notion.
+
+  [exmp]
+  (1) D is DOMAIN of M = SET of human being,  A_21(x,y) = 'x is a brother of y',
+                                              A_22(x,y) = 'x is a parent of y'
+    => BINARY RELATION on D corresponding to
+      the WFF B(x1,x2): [$x3](A_21[x1,x3] , A_22[x3,x2]) is a RELATION of unclehood.
+      |=(M)B[b,c]  <=>  'b is uncle of c'
+
+  (2) D is SET of NATURALs, A_21 is INTERPRETED as '=', f_21 as multiplication,
+                                                                               a1 as 1
+    => B(x1): !A_21(x1,a1) , [@x2]( [$x3](A_21[x1,f_21(x2,x3)]) -> A_21(x2,x1) ; A_21(x2,a1))
+      determines the PROPERTY of being a PRIME number.
+            |=(M)B[k]  <=>  'k is a PRIME number'.
+
+(9)
+   B is CLOSED WFF of LANGUAGE L => for any INTERPRETATION M, either |=(M) B or |=(M) !B
+   B may be TRUE for some INTERPRETATIONs and FALSE for others.
+   [exmp]
+       consider A_11(a1)
+     M is INTERPRETATION which DOMAIN is NATURALs,
+     A_11 is INTERPRETED as PROPERTY of being a PRIME, INTERPRETATION of a1 is 2,
+  => A_11(a1) is TRUE.
+  
+   |B is - NOT CLOSED(B contains FREE VARIABLEs) => ...
+   |   ... B may be neither TRUE nor FALSE for some INTERPRETATION.
+   |[exmp.]
+   |  B is A_21(x1,x2),  D = INTEGERs,  A_21(x1,x2) is INTERPRETED as y<z
+   |  => B is SATISFIED only those SEQUENCEs s=(s1,s2..) of INTEGERs in which s1<s2
+   |  ... as result, B is neither TRUE nor FALSE for this INTERPRETATION.
+   |on the other hand ..
+   | there are WFFs that NOT CLOSED but nevertheless TRUE or FALSE
+   | [exmp]
+   |   A_11(x1) ; !A_11(x1)
+
+(10)
+  Assume t is FREE for xi in B(xi)   =>   [@xi]B(xi) -> B(t) is TRUE for all INTERPRETATIONs
+  
+  .LEMMA 2.1  E - SET of all DENUMERABLE SEQUENCEs in DOMAIN of M
+    t,u -  TERMs, s -  SEQUENCE in E,
+    t' - results from t by replacing all xi by u
+    s' - results from s by replacing all i-th component of s by s*(u)
+  =>
+    s*(t') = (s')*(t)
+
+  .LEMMA 2.2 
+                          s' obtained from s by substituting s*(t) for si in the i-th place
+    t is FREE FOR xi in WFF B(xi) =>
+      (a) SEQUENCE s=(s1,s2..) SATISFIES B(t)  <=>  s' SATISFIES B(xi).
+      (b) [@xi]B(xi) is SATISFIED by s  =>  B(t) is SATISFIED by s.
+
+(11)
+  B does not contain xi FREE  =>  [@xi](B->C) -> (B -> [@xi]C) is TRUE for all INTERPRETATIONs
+
+======= 72
+
+- LOGICALLY VALID - VALID (obscheznachimiy)
+    WFF B is LOGICALLY VALID  <=>  B is TRUE for every INTERPRETATION
+- SATISFIABLE
+|   WFF B is SATISFIABLE   <=>  there is INTERPRETATION for which B is SATISFIED
+|                                                           by at least one SEQUENCE.
+| 
+|=> WFF B is LOGICALLY VALID    <=>   !B is not SATISFIABLE
+|=> WFF B is SATISFIABLE    <=>   !B is not LOGICALLY VALID
+|=> WFF B is CLOSED => B is either TRUE or FALSE for any given INTERPRETATION
+|   that is ... B is SATISFIED by all SEQUENCEs or by none
+|   |-  B is CLOSED =>  [B is SATISFIABLE  <=>  B is TRUE for some INTERPRETATION]
+|
+|=> SET F of WFFs is  SATISFIABLE  <=> 
+|   there is an INTERPRETATION in which there is a SEQUENCE that SATISFIES every WFF of F.
+|
+|=>  impossible for both a WFF B and its negation !B to be LOGICALLY VALID.
+|           B is TRUE for M => !B is FALSE for M
+|
+|- CONTRADICTORY
+|   B is CONTRADICTORY  <=>   B is FALSE for every INTERPRETATION
+|                       <=>   !B is LOGICALLY VALID
+|
+|- LOGICALLY IMPLY  - LOGICAL CONSEQUENCE  - |-
+|    B LOGICALLY IMPLY C  <=> 
+|           in every INTERPRETATION, every SEQUENCE that SATISFIES B also SATISFIES C.
+|   more generally .. 
+|     C is LOGICAL CONSEQUENCE of SET F of WFFs   <=>
+|       in every INTERPRETATION, every SEQUENCE that SATISFIES every WFF in F also SATISFIES C.
+|
+|- LOGICALLY EQUIVALENT 
+|   B and C are LOGICALLY EQUIVALENT  <=>  they LOGICALLY IMPLY each other.
+|                       ^
+| CONSEQUENCES of these | definitions:
+| (1) B |- C  <=>   B->C is LOGICALLY VALID.
+| (2) B and C are LOGICALLY EQUIVALENT  <=>   B<->C is LOGICALLY VALID
+| (3) B, B |- C   =>  C is TRUE
+| (4) F |- C, all WFFs IN F is TRUE  =>  C is TRUE
+
+======================= FIRST-ORDER THEORIES ==================================
+======= 76
+
+YET ANOTHER REASON USE FIRST-ORDER THEORY besise THE REASON THAT TRUTH TABLE
+                DONT WORK IN FIRST-ORDER LOGIC
+concepts and propositions that involve the notion of interpretation and related ideas
+such as TRUTH and model are often called semantical to distinguish them from syntactical
+concepts, which refer to simple relations among symbols and EXPRESSIONS of precise FORMAL
+LANGUAGES. Since SEMANTICAL notions are SET-THEORETIC in character, and since SET THEORY,
+because of the paradoxes. is considered a rather shaky foundation for the study of
+mathematical LOGIC, many logicians consider a SYNTACTICAL approach, consisting of a study
+of FORMAL AXIOMATIC THEORIES using only rather weak number-theoretic methods, to be much safer
+                                                            _______________________
+LET L be a FIRST-ORDER LANGUAGE                             | - FIRST-ORDER FORMAL|
+- FIRST-ORDER THEORY in the LANGUAGE L will be - K          |   SYSTEM(THEORY)    |
+    whose symbols ans WFFs are the symbols and WFFs of L and whose AXIOMS and RULE of INFERENCE
+    specified in the following way.
+
+  AXIOMS of K are divided in two classes:
+    - LOGICAL AXIOMs
+    - PROPER AXIOMs - NON-LOGICAL AXIOMs
+
+  - LOGICAL AXIOMs of K: B,C,D are WFFs of L
+    (A1) B->(C->B)
+    (A2) B->(C->D) -> [(B->C) -> (B->D)]
+    (A3) (!C->!B) -> [(!C->B)->C]
+    (A4) [@xi]B(xi) -> B(t)     if B(xi) is a WFFs of L and t is a TERM of L that is FREE for xi in B(xi).
+                         t may be identical with x => WFFs [@xi]B -> B are AXIOMS by virtue of AXIOM (A4).
+        if t were NOT FREE for xi in B(xi)
+    then ..    B(xi) -- ![@x2]A_21(x1,x2) , t -- x2 (here t is NOT FREE FOR xi)
+            [@x1]( ![@x2]A_21(x1,x2) ) -> ![@x2]A_21(x2,x2)    [x1,x2 some ELEMENTS on your own]
+      A_21 is '=', then ^ is FALSE for this INTERPRATETION 
+          
+    (A5) [@xi](B->C) -> (B->[@xi]C)  if B contains no FREE OCCURRENCES of xi =>
+        
+  - PROPER AXIOMs
+    These cannot be specified, since they vary from THEORY to THEORY. A FIRST-ORDER THEORY
+    in which there are no PROPER AXIOMS is called a - FIRST-ORDER PREDICATE CALCULUS.
+
+  RULES of INFERENCE:
+  - MODUS PONENS:     B,B->C  |-  C
+  - UNIVERSAL GENERALIZATION:    B  |-  [@xi]B     - GENERALIZATION - UNIVERSAL INTRODUCTION
+    [from me]
+       that is if B is TRUE with any VARIABLEs => it is TRUE for all VARIABLEs
+    (wiki)
+                           { |- B(x) => |- [@x]B(x) }
+     GENERALIZATION with HYPOTHESES - the FULL GENERALIZATION RULE allows for HYPOTHESES
+                                     to the left of the turnstile, but with restrictions.
+     | F - is SET of WFFs
+     | F |- B(y) has been DERIVED, the GENERALIZATION RULE states that ...
+     | F |- [@x]B(x) can be DERIVED  if ...
+     |                               ... y is not mentioned in F and x doesnt OCCURE in B
+                                                        ^
+        this restrictions are necessary for SOUNDNESS --|
+      Without the first, one could conclude -- [@x]B(x) -- from the hypothesis B(y).
+      Without the second RESTRICTION, one could make the following DEDUCTION
+          (1) [$z,$w]( z != w)  (Hypothesis)
+          (2) [$w](y != w)  (Existential instantiation)
+          (3) y != x (Existential instantiation)
+          (4) [@x](x != x) (Faulty universal generalization)
+   
+    another (valid) RULES of INFERENCE:
+      - EXISTENTIAL INSTANTIATION   [$x]F(x) :: F(a) - a new CONSTANT or VARIABLE
+            : restriction     -     [a must be new TERM that has not OCCURED in PROOF]
+          
+      - EXISTENTIAL GENERALIZATION   B(a) |- [$x]B(x)
+          [exmp] "Socr=Socr  ->  [$x] x=x"
+      - UNIVARSAL INSTANTIATION     [@x]B(x) -> A(a/x)  (sometimes confused with DICTUM DE OMNI)
+          [exmp] "[@x] x=x   -> Socr=Socr"
+
+      The principle embodied in these two operations is the link between QUANTIFICATIONS
+      and the SINGULAR STATEMENTS that are related to them as INSTANCES.
+
+LET - K be FIRST-ORDER THEORY
+- MODEL of K
+    by the MODEL of K we mean INTERPRETATION of L for which all AXIOMs of K is TRUE
+
+  EVERY THEOREM of K is TRUE in every MODEL of K             <------------------------
+    by the (3)(4) PROPERTIES of SATISFIABILITY:                                       |
+                                                                                      |
+  if the RULES of MODUS PONENS and GENERALIZATION are applied to WFFs that are TRUE   |
+  for a given INTERPRETATION, then the results of these applications are also TRUE. =>|
+    (3) |=(M)B, |=(M)B->C => |=(M)C 
+    (4) B->C is FALSE for M  <=> |=(M)B, |=(M)!C
+
+  As we shall see, the LOGICAL AXIOMS are so designed that the LOGICAL CONSEQUENCES
+                  (in the sense defined on pages 72-73)
+  of the CLOSURES of the AXIOMS of K are precisely the THEOREMS of K. (str 1581)
+  [exmp]
+    K is a FIRST-ORDER PREDICATE CALCULUS =>  the THEOREMS of K are just those
+                                            WFFs of K that are LOGICALLY VALID.
+
+  - AXIOM of FIRST-ORDER SYSTEM (A4) (A5)  EXPLANATION
+  
+    (A4) [@xi]B(xi) -> B(t)             t is NOT FREE FOR xi in B(xi) =>
+      [exmp]                                        unpleasant result would arise:
+      B(x1) is ![@x2]A_21(x1,x2)  t is x2 (t is NOT FREE FOR x1 in B(x1))
+      =>  [@x1]![@x2]A_21(x1,x2) -> ![@x2]A_21(x2,x2)             <--------|
+                                                   A is 'IDENTITY REL.' => |-- is FALSE
+    (A5) [@xi](B->C) -> (B->[@xi]C)
+      [exmp]                        xi is NOT FREE in B  => disaster:
+      B,C is A_11(x1)   (x1 is FREE for in B)
+      =>  [@x1][ A_11(x1) -> A_11(x1)] -> [A_11(x1) -> [@x1]A_11(x1)] 
+      D is SET of INTEGERs  A_11 is "EVEN"   =>  ^ is FALSE
+
+======== 78
+- EXAMPLES of FIRST-ORDER THEORIES
+
+  (1) - PARTIAL ORDER
+   | L have a single A_22 and no FUNCTION LETTERs and INDIVIDUAL CONSTANTs
+   |   we shall write xi < xj  instead of  A_22(xi,xj)
+   | K has two - PROPER AXIOM
+   | 
+   | (a) [@x1]!A_22(x1,x1)  or [@x1]!(x1 < x1)    (- IRREFLEXIVITY)
+   | (b) [@x1,x2,x3](x1<x2, x2<x3 -> x1<x2)       (- TRANSITIVITY)
+   | 
+   | MODEL of K is called  - PARTIALLY ORDERED STRUCTURE    - STURCTURE [exmp]
+  
+  (2) - GROUP THEORY
+   | L have : A_21, f_21, a1
+   |   we can write : A_21(t,s) is "t=s"  |  f_21(t,s) is "t+s"  |  a1 is "0"
+   | K has PROPER AXIOM
+   |
+   | (a) [@x1,x2,x3](x1+(x2+x3) = (x1+x2)+x3)      (associativity)
+   | (b) [@x1](0+x1=x1)                            (identity)
+   | (c) [@x1,$x2](x2+x1=0)                        (inverse)
+   | (d) [@x1](x1=x1)                              (reflexivity of =)
+   | (e) [@x1,x2](x1=x2 -> x2=x1)                  (symmetry of =)
+   | (f) [@x1,x2,x3](x1=x2,x2=x3 -> x1=x3)         (transitivity of =)
+   | (g) [@x1,x2,x3](x2=x3 ->
+   |             x1+x2=x1+x3, x2+x1=x3+x1)         (substitutivity of =)
+   | MODEL of K in which INTERPETATION of A_21 is IDENTITY RELATION
+   |             is called a - GROUP
+   | [@x1,x2](x1+x2 = x2+x1)  =>  GROUP is - ABELIAN
+
+    In general, any THEORY with a FINITE number of PROPER AXIOMS is AXIOMATIC, since
+    it is obvious that one can effectively decide whether any given WFF is a LOGICAL AXIOM.
+
+- STRUCTUREs - MODEL
+    From the MODEL-theoretic point of view, STRUCTURES are the OBJECTS used to define the SEMANTICS
+    of FIRST-ORDER LOGIC. For a given THEORY in MODEL THEORY, a STRUCTURE is called a MODEL
+
+    In UNIVERSAL ALGEBRA and in MODEL THEORY, a STRUCTURE consists of a SET along with
+    a COLLECTION of FINITARY OPERATIONS, and RELATIONS that are defined on it.
+
+=================== PROPERTIES of FIRST-ORDER THEORIES ========================
+======== 79
+
+Instead writing |-(K) B  we will write just  |- B, and FIRST-ORDER THEORIES as just THEORIES
+
+- TAUTOLOGY in FIRST-ORDER LOGIC
+    A TAUTOLOGY in FIRST-ORDER LOGIC is a SENTENCE that can be obtained by taking a
+    TAUTOLOGY of PROPOSITIONAL LOGIC and uniformly replacing each PROPOSITIONAL
+    VARIABLE by a FIRST-ORDER FORMULA (one FORMULA per PROPOSITIONAL VARIABLE).
+
+     a distinction is maintained between LOGICAL VALIDITIES, SENTENCES that are
+     TRUE in every MODEL, and TAUTOLOGIES, which are a @@@PROPER SUBSET of the
+     FIRST-ORDER LOGICAL VALIDITIES. In the context of PROPOSITIONAL LOGIC,
+     these two TERMS coincide.
+
+.PROPOSITION 2.1 (metatheorem)
+    @WFF B of K that is an instance of TAUTOLOGY is THEOREM of K
+
+.PROPOSITION 2.2 (metatheorem)
+    @THEOREM of FIRST-ORDER PREDICATE CALCULUS is LOGICALLY VALID.
+    [exmp]
+      [@x2$x1]A_21(x1,x2) -> ($x1@x2)A_21(x1,x2)
+        is not a THEOREM of any FIRST-ORDER PREDICATE CALCULUS, since it is not LOGICALLY VALID
+        since, let D = INTEGERs   |   A_21(z,y) = z<y
+        => [@x2$x1]A_21(x1,x2) is TRUE , but ($x1@x2)A_21(x1,x2) is FALSE (page73 exmp5)
+
+- CONSISTENT
+  NO WFF B and its NEGATION !B are both PROVABLE in K  =>  A THEORY K is CONSISTENT 
+    A theory is INCONSISTENT if it is NOT CONSISTENT.
+
+.COROLLARY 2.3 (metatheorem)
+    Any FIRST-ORDER PREDICATE CALCULUS is CONSISTENT.
+
+    in an INCONSISTENT THEORY K, EVERY WFF of K is PROVABLE in K
+    some WFF of a THEORY K is NOT a THEOREM of K => K is CONSISTENT
+
+======== 80
+  The - DEDUCTION THEOREM for the PROPOSITIONAL CALCULUS cannot be carried over
+  without modification to FIRST-ORDER THEORIES
+  [exmp]
+    for any B,B |-(K) [@xi]B, but it not always the case that |-(K) B->[@xi]B
+      D = {c,d}, A_11(xi) is PROPERTY of c, =>
+      A_11(xi) -> [@xi]A_11(xi) is FALSE, that is this WFF is NOT LOGICALLY VALID
+        since PREMISE is TRUE but CONSEQUENCE is FALSE (and .proposition 2.2)
+        [not TRUE for any INTERPRETATION]
+
+  A modified, but still useful, form of the DEDUCTION THEOREM may be DERIVED, however.
+  
+  B is WFF in F,  assume that we are given a DEDUCTION D1..Dn from F, together
+  with justification for each step in the DEDUCTION.
+    Di DEPENDS UPON B in this PROOF  <=> :
+      (1) Di is B and justification for Di is that is belong to D, or
+      (2) Di is justified as a direct consequence by MP or Gen of some preceding
+        WFFs of the SEQUENCE, where at least one of these preceding WFFs DEPENDS UPON B.
+  [exmp]
+                                DEDUCTION
+    B, [@xi]B->C |- [@xi]C
+    (D1) B            hyp         D1 DEPENDS UPON B
+    (D2) [@xi]B       D1,Gen      D2 DEPENDS UPON B
+    (D3) [@xi]B->C    hyp         D3 DEPENDS UPON [@xi]B->C
+    (D4) C            D2,D3,MP    D4 DEPENDS UPON B and [@xi]B->C
+    (D5) [@xi]C       D4,Gen      D5 DEPENDS UPON B and [@xi]B->C
+
+======= 81
+.PROPOSITION 2.4 (metatheorem)
+  C does NOT DEPEND UPON B in a DEDUCTION showing that F,B |- C     => F |- C
+
+.PROPOSITION 2.5 [- DEDUCTION THEOREM] (metatheorem)
+  in some DEDUCTION showing that F,B |- C, no application of Gen to a WFF
+  that DEPENDS UPON B has as its QUANTIFIED VARIABLE a FREE VARIABLE of B. 
+                    F |- B-> C
+
+======= 82
+
+.COROLLARY 2.6
+  If a DEDUCTION showing that F,B |- C involves no application of Gen of which
+  the QUANTIFIED VARIABLES is free in B, then F |- B->C
+.COROLLARY 2.7
+  If B is CLOSED WFF and F,B |- C  =>  F |- B->C
+
+=======

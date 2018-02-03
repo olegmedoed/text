@@ -1,0 +1,717 @@
+------- programs -----------------
+cpp - C preprocessor
+cpp -v - list of all include-paths
+
+-------------------------------------------
+reserved words:
+
+auto int char return do static entry typedef for while const if case
+register default sizeof else switch float unsigned enum signed break
+long continue short double struct extern union goto void volatile
+
+------------------------------------------------
+
+int ret_fun (int (*fn) (int)) { return (int) fn; }
+int main() {
+    int   (*fn[1]) (int),    (*fn1) (int) = NULL;
+    fn1 = fn[0] = (int (*)()) ret_fun (fib);  <-- we somehow can do typecast
+                           ^--            without pointing the arg type
+    int x = *(int*)fib;   <-- address of fib func
+}
+
+------------------------------------------------
+
+/* Cells and lists type in C */
+struct cell {   int hd;     struct cell *tl; };
+typedef struct cell cell, *list;
+
+cell one = {.hd = 1, .tl = NULL };
+list two = &one;		    /* 'two' is pointer */
+
+-------------------------------------------
+[from me]
+;;;; about holding object different types (like temlate in C++)
+;; I apply technick what is used in dynamic typing programming langs
+;; it play role of tags in AlgebrDataTypes
+#define SOMETYPE_T 1
+#define SOMETYPE (my_struct *)
+
+typedef struct {
+  int type;
+  .....      
+} my_struct;
+
+my_struct * create (data ....) {
+  my_strut * str = malloc...;
+  str->type = SOMETYPE_T;
+  .....
+}
+;; using (str is created)
+stack = push(stack, (void *) str);
+stack = pop (stack, SOMETYPE str);
+
+-------------------------------------------
+for(int i=0, j=1;i<3; i++, j++);    <= operations in last part (;;***) executed in row
+                                 [that is] first: i++, after that: j++
+        (at least in gcc on linux)
+
+int i, j = 2;
+for(i=0;i<=5,j>=0;i++, j--)    <= here only  "j>=0" is taked into account
+since
+  comma operator  evaluates all its operands and yields the value of the last one
+  "i<=5" is evalueted but result is never used (but it depends from compiller)
+
+-------------------------------------------
+- sizeof is an operator, but not function.
+
+An operator is compiled to a sequence of instructions by
+the compiler. But if the code calls a function, it has to jump to a
+separate piece of code.
+
+sizeof calculated when the program is compiled
+The compiler can determine the size of the storage at compile time.
+
+-------------------------------------------
+On MOST SYSTEMS C compilers typically make the long
+data type the same size as a memory address. So if p is a pointer
+and you want to store it in a long variable a, you can type
+a = (long)p.
+
+-------------------------------------------
+The address of the array...is the address of the array.
+int arr[] = {1,2,3}
+int * pn  = arr
+
+&arr == arr   but &pn != pn
+
+int x[3];  &x <= это указатуль на массыв а &x+1 <= прилюсует не 4 а 12
+
+-------------------------------------------
+signed char c = -3; unsigned int x = c; =>  x == -3 or 0xfffffffd
+
+signed char c = -3;
+unsigned int x = (unsigned char) c; =>  x == 253 or 0x000000fd
+-------------------------------------------
+Can I have a function with just variable arguments, and no fixed arguments at all?
+- No. You need to have at least one fixed argument in order to pass its name to va_start.
+
+What happens if I try to read more arguments from va_arg than have been passed in?
+- Random errors will occur!
+
+What if I try to read an int argument as a double, or something?
+- Random errors will occur!
+
+-------------------------------------------
+int x[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}};
+int (*p1)[3] = (int (*)[3])x;
+
+p1 is a pointer to array from 3 integer elements
+
+-------------------------------------------
+void fn(int const arr[]) | void fn(const int arr[]) <<< void fn(const int * arr) 
+
+-------------------------------------------
+const char * str = "fuck";
+if (str == "fuck") puts("yep");  <--- her "yep" will be printed since literal
+                                  "fuck" mean address of this string in read-only memory
+[but ... it only in gcc and on linux]
+./main.c:11:11: warning: comparison with string literal results in unspecified behavior [-Waddress]
+
+-------------------------------------------
+Every time you pass an array to a
+function, you’ll decay to a pointer
+(pointer knows nothing except the address of array)
+
+-------------------------------------------
+int arr[] = {1,2}
+
+arr[1] and 1[arr]  is the same !!!
+since *(arr+1) and *(1+arr) is the same
+
+here ***[---]  *** is address --- is offset
+
+That’s why arrays begin with index 0
+since arr[0] is *(arr+0)
+
+-------------------------------------------
+you can also subtract numbers from pointers
+
+-------------------------------------------
+When does C adjust the pointer arithmetic calculations?
+
+It happens when the compiler is generating the executable. It
+looks at the type of the variable and then multiplies the pluses and
+minuses by the size of the underlying variable.
+
+If the compiler sees that you are working with an int array
+and you are adding 2, the compiler will multiply that
+by 4 (the length of an int) and add 8.
+
+-------------------------------------------
+Does C use the sizeof operator when it is adjusting
+pointer arithmetic?
+
+Effectively. The sizeof operator is also resolved at
+compile time, and both sizeof and the pointer arithmetic
+operations will use the same sizes for different data type
+
+-------------------------------------------
+You can't multiply pointers!
+
+-------------------------------------------
+scanf("%s", str)   such using of scanf is dangerous, if input larger then str
+
+use instead   fgets(str, sizeof(str), stdin); 
+but           gets     it most potentially dangerous
+
+see comparing on page68
+
+-------------------------------------------
+const char * str = "string"; str[0] = 'x';
+
+for better error explanation when                 
+  instead of "bus error" or "has stopped working"
+[for me]
+  segmentation fault : Error 139
+get
+  "error: assignment of read-only location"
+
+it since if type just 'char *' compiller doesn't know
+that pointer will always point to this string
+
+all operation system(except Cygwin) enforce "strings"(literal)
+to be read-only [BUT IT IS UNDEFINED BEHAVIOR]
+
+-------------------------------------------
+const variable is allowed to assign using memset(), although '=' is not working
+
+-------------------------------------------
+char x = 'A';  <=== here x is unsigned char(defined by stadard)
+char y = -1 ;  <=== here y is signed   char(implementation-defined)[linux gcc]
+
+-------------------------------------------
+different memory segments will always appear in the same order
+for a given operating system. But different operating systems can
+vary the order slightly. For example, Windows doesn’t place the code
+in the lowest memory addresses.
+
+-------------------------------------------
+When the program is compiled, all the references to array variables are
+replaced with the addresses of the array.  So the truth is that the array variable
+won’t exist in the final executable. That’s OK because the array variable will never
+be needed to point anywhere else
+
+-------------------------------------------
+array of arrays
+  int ar1[][10] = {1,2}      sizeof ar1 is 20
+array of pointers
+  int *ar2[] = {1,2}         sizeof ar2 is 8
+
+-------------------------------------------
+the Standard Input can’t be printed to.
+
+-------------------------------------------
+IF YOU WANT TO PERFORM A DIFFERENT TASK, CONSIDER WRITING A SEPARATE SMALL TOO
+
+It is important that small tools use the Standard Input and Standard Output
+Because it makes it easier to connect tools together with pipes.
+
+Since small tools usually don’t solve an entire problem on their own, just a small
+technical problem, like converting data from one format to another. But if you can
+combine them together, then you can solve large problems
+
+SMALL TOOLS NORMALLY READ AND WRITE TEXT DATA.
+
+-------------------------------------------
+What is a pipe, actually?
+
+The exact details depend on the operating system. Pipes might be made from sections
+of memory or temporary files.  The important thing is that they accept data
+in one end, and send the data out of the other in sequence
+
+Both of the programs will run at the same time; as output is produced by
+the first program, it can be consumed by the second program.
+
+-------------------------------------------
+If several processes are connected together with pipes and then I use > and < to redirect
+the Standard Input and Output, which processes will have their input and output redirected?
+
+The < will send a file’s contents to the first process in the pipeline. The > will
+capture the Standard Output from the last process in the pipeline.
+
+[exmp]
+  (./one | ./two) < one.txt > two.txt
+
+  the parentheses really necessary
+the parentheses will make sure the data file is read by the Standard Input of the one program.
+
+-------------------------------------------
+2>&1 -- redirect errors output to stardart output
+
+>> make > file.txt 2>&1
+
+-------------------------------------------
+There are two versions of the main() function—one with command-line arguments, and one without.
+
+Command-line arguments are passed to main() as an argument count and an array
+of pointers to the argument strings.
+
+-------------------------------------------
+Dont store big vars in small
+int x = 0b100010001
+char y = x; >>> y = 00010001;
+
+signed int i = -100;
+signed char x = i;
+in such case "sign" of i dont sent to x [that is]>> i=0xffffff9c x=0x9c
+
+-------------------------------------------
+int x = 1, y = 2;
+float f = (float)x / y; <- y be automatically casted to float
+or .. 
+float f = x / 10.0; <- x be automatically casted to float
+
+-------------------------------------------
+it have no meaning signed or unsigned "type" when you assign literal to it
+[that is]
+  unsigned char x =  3;
+  signed   char x = -3; >> in the both cases x is 0xfd
+but they is treated differently
+
+signed char a = -100;
+unsigned char b = a;  [here 'a' and 'b' = x09c , but 'b' is treated as 156, but 'a' as -100] 
+if (a < b) ... ; <<-- true condition
+            (sign of 'a' is took into account although compared with unsigned)
+[then ..]
+let ..  b = a + b; >> 56 [since .. 156 + 156 = 312 and - 256(since overflow) = 56]
+        a = b + a; >> 56 [since .. -100 + 156 = 56]
+BUT!!! .. indeed in both cases happen [0x9c + 0x9c] and surplus bites get rig
+              and we have 56 ... IN BOTH CASES
+[that is]
+    IN ARITHMETIC SIGN HAVE NO MATTER
+      enough look at this as an operation with binary nums
+
+[the same ...]
+unsig 20 + sig -10(or unsig 246) then .. we have  10 in both case 
+трактуй       1111 0110 -10 оно же 246
+              0001 0100 20
+            1 0000 1010 
+
+-------------------------------------------
+(on 32 bit machine)
+  long long = 8bytes
+  long double = 12bytes
+  long float  ---  we have no such type
+
+-------------------------------------------
+#include <limits.h> | #include <float.h>
+INT_MIN, INT_MAX    | FLT_MIN, FLT_MAX
+
+-------------------------------------------
+When C was first created, most machines were 8-bit. Now, most machines are 32- or 64-bit.
+Because C doesn’t specify the exact size of its data types, it’s been able to adapt over time.
+And as newer machines are created, C will be able to make the most of them as well.
+
+he bit size of a computer can refer to several things, such as the size
+of its CPU instructions or the amount of data the CPU can read from memory. The
+bit size is really the favored size of numbers that the computer can deal with
+
+-------------------------------------------
+How does the computer represent a number with a decimal point?
+
+It’s complicated. Most computers used a standard published by the
+  IEEE Standard for Floating-Point Arithmetic (http://tinyurl.com/6defkv6)
+
+-------------------------------------------
+1: int main(){
+2:   float a = 4.4, b = 3.6;   printf("%f \n", plus(a,b)); ***
+3:   returtn 0;
+4: }
+5: float plus(float a, float b) { return a + b; }
+
+./main.c:11:3: warning: implicit declaration of function ‘plus’ [-Wimplicit-function-declaration]
+./main.c:11:3: warning: format ‘%f’ expects argument of type ‘double’, but argument 2 has type ‘int’ [-Wformat]
+./main.c: At top level:
+./main.c:16:7: error: conflicting types for ‘plus’
+
+[since...]
+*** The compiler sees a call to a function it doesn’t recognize. ("plus")
+Rather than complain about it, the compiler figures that it will find out more about the function
+later in the src file. compiler simply remembers to look out for the function later on in the file
+
+compiler can’t know what the function will return just yet, so it makes an assumption that it will return an int.
+When it reaches the code for the actual function the compiler thinks it has two functions with the same name.
+
+[another exmp]
+  float ping() {...; pong();...}
+  float pong() {...; ping();...}
+
+TO SOLVE THIS PURPOSE SPLIT DECLARATION FROM DEFINITION
+
+When you explicitly tell the compiler about a function, it’s called a FUNCTION DECLARATION:
+  DECLARATION is just function SIGNATURE:
+      a record of what the function will be called, what kind of
+      parameters it will accept, and what type of data it will return.
+
+===== covered from start to p174
+-------------------------------------------
+as to design
+(pass parameters in the form of structure you have opportunity change
+                 parameter format without function signature changing )
+
+-------------------------------------------
+struct some { int x; };
+int main() {
+  struct some one = { 1 };
+  struct some two = one;
+}
+when '=' is used, the computer will create a brand-new copy of the struct. That means it will
+need to allocate another piece of memory of the same size, and then copy over each of the fields.
+
+when you’re assigning struct variables, you are telling the computer to copy data.
+
+by the way, it is impossible with string(that is array)
+
+-------------------------------------------
+nested structures
+  struct some1 { int one; };
+  struct some2 { int one; struct some1 two; };
+  ...
+  struct some2 ex = { 3, { 2 }};
+
+-------------------------------------------
+typedef struct name {int x;} aliasname;  or..   typedef struct {int x;} alias name;
+
+The alias is just the name of your type. That means there are two names to think about:
+the name of the struct (struct cell_phone) and the name of the type (phone). Why have two names?
+You usually don’t need both. The compiler is quite happy for you to skip the struct name, like this
+
+-------------------------------------------
+struct fields are stored in memory in the same order they appear in the code.
+
+-------------------------------------------
+Do struct fields get placed next to each other in memory? 
+- Sometimes there are small gaps between the fields.
+
+Why’s that?
+The computer likes data to fit inside word boundaries. So if a computer uses
+32-bit words, it won’t want a short, say, to be split over a 32-bit boundary.
+So it would leave a gap and start the short in the next 32-bit word
+
+Does that mean each field takes up a whole word?
+
+No. The computer leaves gaps only to prevent fields from splitting across word
+boundaries. If it can fit several fields into a single word, it will.
+
+the computer care so much about word boundaries, since ...
+It will read complete words from the memory. If a field was split across more than one word,
+the CPU would have to read several locations and somehow stitch the value together. And that’d be slow
+
+-------------------------------------------
+In languages like Java, if I assign an object to a variable, it doesn’t copy the object,
+it just copies a reference.  Why is it different in C?
+
+In C, all assignments copy data. If you want to copy a reference to a piece of data, you should assign a pointer.
+
+-------------------------------------------
+So what’s an anonymous struct?
+- One without a name. So typedef struct { ... } spider_man; has an alias of spider_man,
+  but no name. Most of the time, if you create an alias, you don’t need a name.
+
+[from me]
+  Technically, all line like:
+    struct {... }; | union  {... }; | enum {... };
+  is anonymous 'creations', so they are used with typedef which give them the aliases
+
+so instead:
+    struct some varname = ...; or  union  some varname = ...; or  enum some varname = ...;
+    structalias varname = ...; or  ualias some varname = ...; or  enumalias varname = ...;
+
+[another exmp anonymous structure(union) which declared "na letu"]
+struct { int one; int two; } hello = { 1, 3};
+union { int one; int two; } hello = { .one = 3 };
+
+[by the way]
+  union { int one; int two; } hello = { .two = 1, .one = 3 };
+  here  hello.two and hello.one is 3, but it may be undefined behavior(i don't know)
+
+-------------------------------------------
+typedef struct {..} name;
+int main(){ name one = {..};  fun(one); ... }
+void fun (name argone) {.. }    <<<--  here function create new copy of passed argument
+
+[since]        IN C, PARAMETERS ARE PASSED TO FUNCTIONS BY VALUE
+
+That means that when you call a function, the values you pass into it are assigned to the parameters
+so in fun it like....
+  int argone = one;
+But remember: when you assign structs in C, the values are copied.
+
+When you call a function, the values are copied to the parameter variables. 
+
+so... for pass original name
+void fun (name * argone) {..; (*argone).someprop = ..; ...}
+
+  | (*argone).someprop   | vs. | *argone.someprop [really... *(argone.someprop..)|
+  |  some prop of argone |     | content of location given by argone.someprop    |
+
+  (*argone.someprop)  means   argone->someprop
+
+-------------------------------------------
+Why are values copied to parameter variables?
+  The computer will pass values to a function by assigning values to
+  the function’s parameters. And all assignments copy values.
+
+Why isn’t *t.age just read as (*t).age?
+  Because the computer evaluates the dot operator before it evaluates the *.
+
+-------------------------------------------
+The computer needs to make sure that a union is always the same size. The only
+way it can do that is by making sure it is large enough to contain any of the fields.
+
+union(struct) name{ int one; float two; char three[10];}
+  take a space divisible by WORD(4b) (that is...  12 union or 20 struct)
+union(struct) name{ char three[10];}
+  both take 10b, I think since here is needless to have access to int and float
+
+-------------------------------------------
+>>typedef union {int one; double two;} some;
+
+C89 notation:    some x = { 1 }    <<<  store a value for the first field.
+
+A DESIGNATED INITIALIZER sets a union field value by name
+some x = {.one = 1, .two = 2.5};
+
+DESIGNATED INITIALIZERS can be used to set the initial values of fields in structs as well.
+
+>>typedef struct {int one; some unitwo} awesome;
+>>awesome smpl = {.one = 3, unitwo.two = 3.5};
+ 
+-------------------------------------------
+somestruct smpl = {... }  <<<< good
+somestruct smpl;
+smpl = {... };   <<<<  bad
+
+compiler will only know that {... } represents a struct if it’s used on the same line
+that a struct is declared. When it’s on a separate line, the compiler thinks it’s an array
+
+-------------------------------------------
+structs and unions separate items with semicolons (;), but enums use commas.
+struct {int a; ..} and union {int b;...}  | but enum {ONE,...}
+
+-------------------------------------------
+Recursive structures need names.
+If you use the typedef command, you can normally skip giving the struct a proper name.
+But in a recursive structure, you need to include a pointer to the same type. C syntax
+won’t let you use the typedef alias, so you need to give the struct a proper name.
+
+[what is propername]
+  >> struct propername {... };
+
+-------------------------------------------
+declaration a new variable right in the middle of the code is allowed only in C99 and C11.
+In ANSI C, you need to declare all your local variables at the top of a function
+
+-------------------------------------------
+Why is the heap called the heap?
+Because the computer doesn’t automatically organize it. It’s just a big heap of data.
+
+Does strdup() actually call the malloc() function?
+It will depend on how the C Standard Library is implemented, but most of the time, yes.
+
+-------------------------------------------
+How does valgrind intercept calls to malloc() and free()?
+
+The malloc() and free() functions are contained in the C Standard Library. But valgrind contains
+a library with its own versions of malloc() and free(). When you run a program with valgrind,
+your program will be using valgrind’s functions, rather than the ones in the C Standard Library.
+
+-------------------------------------------
+if function pointers are just pointers, why don’t you need to prefix
+  them with a * when you call the function?
+- You can. In the program, instead of writing match(ADS[i]) , you could have written (*match)(ADS[i]).
+
+And could I have used & to get the address of a method?
+- Yes. Instead of fun(some_fun), you could have written fun(&some_fun)
+
+Then why didn’t I?
+- Because it makes the code easier to read. If you skip the * and &,
+  C will still understand what you’re saying.
+
+-------------------------------------------
+Array of functions  int   (*name[])(....)
+                    float (*name[])(....)  ...
+    name[1](....)
+
+-------------------------------------------
+when call like :   fn3(fn1(), fn2())
+  - gcc on linux compile such that fn2 is called first, but it is UNDEFINED BEHAVIOR.
+
+-------------------------------------------
+variable declared inside any block (fun, cycle, conditional operator or just block)
+can be used only inside this block
+
+>>> since:    IT IS ONE OF THE MAIN PRINCIPLES OF STRUCTURED PROGRAMMING
+
+-------------------------------------------
+const int * x => константная переменная
+int * const x => константный указатель
+
+char *s, t;    mean   char * s; char t;
+but not      char * s; char* t;
+-------------------------------------------
+(a>b)?b=a:b=b;    // Here is the error
+error: lvalue required as left operand of assignment
+
+since: Assignment has a lower precedence than the ternary operator
+  ((a>b)?b=a:b) = b;  use instead   b = (a>b)?a:b;
+
+-------------------------------------------
+#include может включить в исходник любой текстовый файл(даже с расширением txt)
+#include <..> ищет файлы в /usr/include /usr/local/include
+hfc397(3 способа работать с include)
+
+-------------------------------------------
+
+-------------------------------------------
+-------------------------------------------
+-------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++
+
+====sockets=============================
+
+/proc/sys/net/ipv4/tcp_rmem <== size of sock buf for read and write
+/proc/sys/net/ipv4/tcp_wmem  -- ( getsockopt <- SO_RCVBUF )
+
+при неблокир сокет. испол. syslog для логорования, бо printf блок прогр.
+
+accept из неблокирующего слуш. сокета создает блокирующий сокет для обмена данными.
+
+send return zero if receiver buffer is overflowed
+========================================
+man queue
+man 3 tree
+
+valgrind for tracking memory leak;hfc343
+
+A return statement without an expression shall only appear in a function whose return type is void.
+
+почему sleep может произвести впечатления что не работает в цикле
+http://stackoverflow.com/questions/13568388/c-sleep-function-not-working
+
+$? - contain result returned by program(return 0; for exmp)
+
+atoi - преобразует строку в число
+
+while(scanf("%f %f %79s[^\n]", &lat, &lon, info) == 3)
+означает давай мне  ^-- символы пока не закончится строка
+
+http://stackoverflow.com/questions/3025050/error-initializer-element-is-not-constant-when-trying-to-initialize-variable-w
+немного о константах ^ const int xxx <= это только read-only variable разм в стеке
+
+const int x = 3; int * y = &x; *y = 4;   ===>  x == 4 ! можно менять значение
+
+char str[] = "fuck"; => переменная str размещена в стеке(выделяется память в
+стеке и туда копируется "fuck" <-которая является глоб. пер.) 111!(hfc(rus)) 
+
+оператор преобразуется компиляторов а последовательность процессорных
+команд(инструкций) но если это функция то процессор переходит к определенному
+коду.( еще про sizeof читай на 93head_firs_c(rus))
+
+приоритет разымен.(*) меньше -> | *struk->data ==> разыменует data
+
+в hfc указано что область кода не предназначена для перезаписи.
+
+если глобальная переменная обьявленна после функции то ее не будет видно(вобщем 
+порядок имеет значение)
+
+fgets(str, sizeof(str), stdin);    это делается что бы убрать знак \n который
+str[strlen(str) - 1] = '\0'; <===  вставляется при вводе в stdin
+ - strlen вернет "blabla\n\0.." <== 7
+
+char * str[] = {"fuck", "hello", "suka"}; <= строки в глобальной области
+
+172(hfc(rus)) - запуск с пайпами(каналами)
+
+проверка безопасности при чтении файла 184(hfc(rus))
+
+getopt - 186-192
+
+линковка - склеивание обьектных файлов в один.(222)
+
+extern variable - 223
+
+о компиляции и линковке 228
+о компоновщике(линкере) интересно fhc(401) true name is - ld
+
+структуры в памяти(hfc(rus))263
+
+struct food; struct fish; <== при таком формате обьявления структура fish может
+struct fish{                  иметь только указатель на food ибо компил не может
+  struct food corm;           определить размер food в случае его вложения
+};
+struct food{ };
+
+-функции с переменным количеством параметров
+void fn(int args, ...){} значит суй сколько хоч, поймет только первый
+hfc383(об ошибках с перем колич аргументов)
+
+просмотреть список имен хранящихся внутри lib можно командой nm
+lib файлы хранятся либо в /usr/lib либо в /usr/local/lib
+интересные файлы про lib fhc(400)
+процес сборки програимы с lib  fhc405
+
+so  - hfc410   |   нельзя переименовывать so после сборки hfc412
+
+$LD_LIBRARY_PATH - хранит пути к so вне /usr/lib(/usr/local/lib)  hfc413
+стандартная папка /usr/lib
+
+system -       <== выполняет программу в отдельном процессе 
+exec - hfc(442)    a exec в том же, exec запускает програму если указываешь
+env_variables 444  со скриптом(это характерно для linux)
+
+при записи ls | grep *  - ls является дочерным процессом который порождается
+родительским grep
+
+котор создаются с помощью mkfifo()
+
+при заверш дочерного проц. канал закрыв и fgets получает символ завершения файла
+
+sigaction() - регистрирует обработчик сигналов.
+
+See man 7 signal, section Async-signal-safe functions for the list of functions you can use in a signal handler.
+
+для компил кода с струк sigaction необходимо добав флаг компил -D_POSIX_C_SOURCE
+
+memset() -- заполняет байты в структуре -(not from hfc)
+bzero, bstring, memcpy, memcmp
+
+получение сигнала прерывает считывание с потока(fgets)
+
+-SIGKILL не может быть перехвачен в программе читай подробней(hfc494)
+-SIGSTOP can’t be ignored either. It’s used to pause your process. hfc494
+
+слать самому себе сигнал можно с помошью  -- raise  hfc494
+
+таймер который посыл сигналы -- alarm()
+
+не используй одновременно   sleep() и alarm()   hfc495
+
+обработчики сигналов наследуютя после fork() [no fhc]
+
+htons htonl - для перестановки байтов от сетевого типа хранения к компьютерному
+
+On Linux and the Mac, if the same signal is repeated very quickly, the kernel might choose to only send the signal once to the process. On Cygwin, it will always send both signals.  But again, you should not assume that just because you sent the same signal twice, it will be received twice.  hfc(465eng) 
+
+на експерементальном уровне установлено что один сигнал не может перервать
+работу обработчика предидущего сигнала если! сигналы одного! типа
+когда обрабатывал SIGINT то пока не закончило обрабатывать один сигнал, другой
+не начинало, и когда я жал раза 3 Ctrl-C во время обработки, то следуший
+обработчик вызивался только раз, тоисть как и писалось(не помн где) что дохуя
+частые сигналы могут сбрасиваться(тоесть нет точного стека)
+
+http://stackoverflow.com/questions/15482198/alarm-can-be-used-in-multithreading-like-this
+
+вместо longjmp прежпочтительней siglongjmp
+

@@ -1,0 +1,40 @@
+=======================================
+
+- define an alphabet
+
+A = {a',a'',a'''.., !, -> }
+
+- define a language
+
+Pa' .. Pa'' .. Pa''' ...
+Px -> P!x
+Px -> Py -> P'x->y'
+
+- define formal system
+
+R1 |- a->(b->a)
+R2 |- (a->(b->c)) -> (a->b)->(b->c)
+R3 |- [!a->!c] -> [(!a->c)->a]
+
+R4 a, a->b |- b
+
+=======================================
+
+- define an alphabet
+
+  A = { ! -> @ ( , )
+        x1..xn(may be empty)
+        f10..fnn(may be empty)
+        P10..Pnn }
+
+- define language 
+
+Tx1 .. Tx2 ....
+Tx1 -> .. Txn -> Tf1nx1..xn
+[here I dont know as yet how write correctly, since I should read further a Smullyan book for that]
+P(Ts1) -> .. -> P(Tsn) -> P(Ts1)..(Tsn)
+Ps -> P!s
+Ps -> Pv -> P's->v'
+Ps -> Txn -> P@xns
+
+- define formal system   ( latter, since I finaly conceive a principe of definnition)
